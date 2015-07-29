@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Bear Tracks</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+
+    <string-array name="activities">
+        <item>Home</item>
+        <item>Calendar</item>
+        <item>Groups</item>
+        <item>People</item>
+        <item>Projects</item>
+    </string-array>
+</resources>
