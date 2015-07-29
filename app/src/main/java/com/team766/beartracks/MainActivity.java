@@ -1,99 +1,109 @@
 package com.team766.beartracks;
 
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.content.res.Configuration;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 
 public class MainActivity extends AppCompatActivity {
-    private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-    private Home_Fragment home_fragment;
-    private Calendar_Fragment calendar_fragment;
-    private Groups_Fragment groups_fragment;
-    private People_Fragment people_fragment;
-    private Project_Fragment project_fragment;
-    private String[] activityNames;
     private FragmentManager fragmentManager;
+    private NavigationView nvDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        activityNames = getResources().getStringArray(R.array.activities);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.Toolbar);
+        setSupportActionBar(toolbar);
 
-        //This next chunk of code is used to implement the nav drawer
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, activityNames));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        // Find our drawer view
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        // Setup drawer view
+        setupDrawerContent(nvDrawer);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_close);
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        //End nav drawer implementation
-
-        home_fragment = new Home_Fragment();
-        calendar_fragment = new Calendar_Fragment();
-        groups_fragment = new Groups_Fragment();
-        people_fragment = new People_Fragment();
-        project_fragment = new Project_Fragment();
 
         fragmentManager = getSupportFragmentManager();
-        swapFragment(home_fragment);
     }
 
-    //Registers User clicks to set position
-    private class DrawerItemClickListener implements ListView.OnItemClickListener{
-        @Override
-        public void onItemClick(AdapterView parent, View view, int position, long id){
-            setPosition(position);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
-    //Decides which fragment to switch to
-    public void setPosition(int position){
-        switch (position){
-            case 0:
-                swapFragment(home_fragment);
+    private void setupDrawerContent(NavigationView navView){
+        navView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
+    }
+
+    public void selectDrawerItem(MenuItem item){
+        Fragment fragment = null;
+
+        Class fragmentClass;
+        switch (item.getItemId()){
+            case R.id.home_frag:
+                fragmentClass = Home_Fragment.class;
                 break;
-            case 1:
-                swapFragment(calendar_fragment);
+            case R.id.cal_frag:
+                fragmentClass = Calendar_Fragment.class;
                 break;
-            case 2:
-                swapFragment(groups_fragment);
+            case R.id.groups_frag:
+                fragmentClass = Groups_Fragment.class;
                 break;
-            case 3:
-                swapFragment(people_fragment);
+            case R.id.people_frag:
+                fragmentClass = People_Fragment.class;
                 break;
-            case 4:
-                swapFragment(project_fragment);
+            case R.id.project_frag:
+                fragmentClass = Project_Fragment.class;
                 break;
+            //happy now Brett?
+            default:
+                fragmentClass = Home_Fragment.class;
         }
-        mDrawerLayout.closeDrawers();
-    }
 
-    //Changes the current fragment to the user selected fragment
-    private void swapFragment(Fragment fragment){
+        try{
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
         fragmentManager.beginTransaction().replace(R.id.content_holder, fragment).commit();
+
+        item.setChecked(true);
+        setTitle(item.getTitle());
+        mDrawerLayout.closeDrawers();
+
     }
 
     @Override
@@ -102,13 +112,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

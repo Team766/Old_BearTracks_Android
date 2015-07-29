@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
@@ -15,6 +15,8 @@
         <item name="colorControlNormal">#c5c5c5</item>
         <item name="colorControlActivated">@color/Gold</item>
         <item name="colorControlHighlight">@color/Gold</item>
+
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="ColorActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
