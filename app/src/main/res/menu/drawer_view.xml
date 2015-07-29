@@ -4,21 +4,26 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/home_frag"
+            android:icon="@drawable/ic_homeicon"
             android:title="Home"
             android:checked="true"/>
         <item
             android:id="@+id/cal_frag"
+            android:icon="@drawable/ic_calicon"
             android:title="Calendar" />
 
         <item
             android:id="@+id/groups_frag"
+            android:icon="@drawable/ic_groupicon"
             android:title="Groups" />
 
         <item
             android:id="@+id/people_frag"
+            android:icon="@drawable/ic_pplicon"
             android:title="People" />
         <item
             android:id="@+id/project_frag"
+            android:icon="@drawable/ic_projecticon"
             android:title="Projects" />
 
     </group>
