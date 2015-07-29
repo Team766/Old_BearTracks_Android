@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home_frag"
+            android:title="Home"
+            android:checked="true"/>
+        <item
+            android:id="@+id/cal_frag"
+            android:title="Calendar" />
+
+        <item
+            android:id="@+id/groups_frag"
+            android:title="Groups" />
+
+        <item
+            android:id="@+id/people_frag"
+            android:title="People" />
+        <item
+            android:id="@+id/project_frag"
+            android:title="Projects" />
+
+    </group>
+</menu>
