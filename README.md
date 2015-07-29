@@ -22,4 +22,4 @@ The Android Open Source Project
 
 ### Dev 
 
-Made by [tommypacker] for [Team766] during the Summer of 2015.
+Made by [Tommy Yu] for [Team766] during the Summer of 2015.
