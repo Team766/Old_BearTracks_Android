@@ -1,10 +1,12 @@
-package com.team766.beartracks;
+package com.team766.beartracks.UI;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.team766.beartracks.R;
 
 /**
  * Created by tommypacker on 7/28/15.

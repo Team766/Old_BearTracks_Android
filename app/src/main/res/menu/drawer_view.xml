@@ -6,7 +6,7 @@
             android:id="@+id/home_frag"
             android:icon="@drawable/ic_homeicon"
             android:title="Home"
-            android:checked="true"/>
+            android:checked="true" />
         <item
             android:id="@+id/cal_frag"
             android:icon="@drawable/ic_calicon"

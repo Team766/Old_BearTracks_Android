@@ -1,5 +1,7 @@
 package com.team766.beartracks;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.content.res.Configuration;
@@ -13,12 +15,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
 
+import com.firebase.client.Firebase;
+import com.team766.beartracks.UI.Calendar_Fragment;
+import com.team766.beartracks.UI.Groups_Fragment;
+import com.team766.beartracks.UI.Home_Fragment;
+import com.team766.beartracks.UI.People_Fragment;
+import com.team766.beartracks.UI.Project_Fragment;
+
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private FragmentManager fragmentManager;
     private NavigationView nvDrawer;
+    private Home_Fragment home_fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         fragmentManager = getSupportFragmentManager();
+
+        home_fragment = new Home_Fragment();
+        fragmentManager.beginTransaction().replace(R.id.content_holder, home_fragment).commit();
+
     }
 
     @Override
