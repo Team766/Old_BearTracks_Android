@@ -64,5 +64,4 @@ public class create_account extends AppCompatActivity {
         this.finish();
     }
 
-
 }

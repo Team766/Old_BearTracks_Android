@@ -21,7 +21,7 @@ public class welcome_screen extends AppCompatActivity {
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
     public static final String PREFS_NAME = "MyPrefsFile";
-    //protected Firebase ref = new Firebase("https://beartracks.firebaseio.com");
+    private BroadcastReceiver receiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -30,21 +30,31 @@ public class welcome_screen extends AppCompatActivity {
 
         settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.package.ACTION_LOGIN");
-        registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Log.d("onReceive", "Login in progress");
-                finish();
-            }
-        }, intentFilter);
-
         if (settings.getBoolean("hasLoggedIn", false)) {
             moveToHome();
         }
 
         setContentView(R.layout.welcome_sreen);
+    }
+
+    @Override
+    public void onPause(){
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.package.ACTION_LOGIN");
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d("onReceive", "Login in progress");
+                finish();
+            }
+        };
+        registerReceiver(receiver, intentFilter);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        unregisterReceiver(receiver);
     }
 
     public void existingLogin(View view){
