@@ -38,7 +38,14 @@ public class welcome_screen extends AppCompatActivity {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        unregisterReceiver(receiver);
+    }
+
+    @Override
     public void onPause(){
+        super.onPause();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.package.ACTION_LOGIN");
         receiver = new BroadcastReceiver() {
@@ -51,11 +58,6 @@ public class welcome_screen extends AppCompatActivity {
         registerReceiver(receiver, intentFilter);
     }
 
-    @Override
-    public void onStop(){
-        super.onStop();
-        unregisterReceiver(receiver);
-    }
 
     public void existingLogin(View view){
         Intent intent = new Intent(getApplicationContext(), login_activity.class);
