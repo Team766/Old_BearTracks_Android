@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private String userEmail;
     static final String STATE_SELECTED_POSITION = "orientation";
     private int mCurrentSelectedPosition = 0;
-    private boolean mFromSavedInstanceState = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,32 +42,38 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             mCurrentSelectedPosition =
                     savedInstanceState.getInt(STATE_SELECTED_POSITION);
-            mFromSavedInstanceState = true;
         }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.Toolbar);
-        setSupportActionBar(toolbar);
+        setupToolbar();
+        setupNavDrawer();
 
+        fragmentManager = getSupportFragmentManager();
+        //setup default fragment
+        home_fragment = new Home_Fragment();
+        fragmentManager.beginTransaction().replace(R.id.content_holder, home_fragment).commit();
+
+    }
+
+    private void setupNavDrawer(){
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        // Find our drawer view
+        // Find and setup drawerview
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
-        // Setup drawer view
         setupDrawerContent(nvDrawer);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_close);
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
 
-        fragmentManager = getSupportFragmentManager();
-
-        home_fragment = new Home_Fragment();
-        fragmentManager.beginTransaction().replace(R.id.content_holder, home_fragment).commit();
-
+    private void setupToolbar(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.Toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
     }
 
     @Override
