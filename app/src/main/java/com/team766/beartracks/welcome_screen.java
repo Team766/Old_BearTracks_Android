@@ -20,17 +20,15 @@ import com.firebase.client.Firebase;
  */
 public class welcome_screen extends AppCompatActivity {
 
-    private SharedPreferences settings;
-    private SharedPreferences.Editor editor;
     public static final String PREFS_NAME = "MyPrefsFile";
-    private BroadcastReceiver receiver;
+    public BroadcastReceiver receiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
 
-        settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
         if (settings.getBoolean("hasLoggedIn", false)) {
             moveToHome();
@@ -42,28 +40,6 @@ public class welcome_screen extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle("Welcome");
     }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        unregisterReceiver(receiver);
-    }
-
-    @Override
-    public void onPause(){
-        super.onPause();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.package.ACTION_LOGIN");
-        receiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Log.d("onReceive", "Login in progress");
-                finish();
-            }
-        };
-        registerReceiver(receiver, intentFilter);
-    }
-
 
     public void existingLogin(View view){
         Intent intent = new Intent(getApplicationContext(), login_activity.class);
