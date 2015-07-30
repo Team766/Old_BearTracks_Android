@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 import com.team766.beartracks.UI.Calendar_Fragment;
@@ -29,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private FragmentManager fragmentManager;
     private NavigationView nvDrawer;
-    private Home_Fragment home_fragment;
+    private SharedPreferences settings;
+    private Toolbar toolbar;
     private String userEmail;
+    private TextView emailProfile;
     static final String STATE_SELECTED_POSITION = "orientation";
     private int mCurrentSelectedPosition = 0;
 
@@ -43,32 +46,37 @@ public class MainActivity extends AppCompatActivity {
             mCurrentSelectedPosition =
                     savedInstanceState.getInt(STATE_SELECTED_POSITION);
         }
-
         setupToolbar();
         setupNavDrawer();
 
+        settings = getSharedPreferences(welcome_screen.PREFS_NAME, MODE_PRIVATE);
+        userEmail = settings.getString("userEmail", "");
+        emailProfile = (TextView) findViewById(R.id.userEmailDisplay);
+        emailProfile.setText(userEmail);
+
         fragmentManager = getSupportFragmentManager();
         //setup default fragment
-        home_fragment = new Home_Fragment();
+        Home_Fragment home_fragment = new Home_Fragment();
         fragmentManager.beginTransaction().replace(R.id.content_holder, home_fragment).commit();
 
     }
 
     private void setupNavDrawer(){
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if(toolbar != null){
+            mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            // Find and setup drawerview
+            nvDrawer = (NavigationView) findViewById(R.id.nvView);
+            setupDrawerContent(nvDrawer);
 
-        // Find and setup drawerview
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
-        setupDrawerContent(nvDrawer);
+            mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                    R.string.drawer_open, R.string.drawer_close);
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.string.drawer_open, R.string.drawer_close);
-
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+            mDrawerLayout.setDrawerListener(mDrawerToggle);
+        }
     }
 
     private void setupToolbar(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.Toolbar);
+        toolbar = (Toolbar) findViewById(R.id.Toolbar);
         if(toolbar != null){
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
