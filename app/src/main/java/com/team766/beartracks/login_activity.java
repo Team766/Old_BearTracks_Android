@@ -63,6 +63,7 @@ public class login_activity extends AppCompatActivity {
             @Override
             public void onAuthenticated(AuthData authData) {
                 editor.putBoolean("hasLoggedIn", true);
+                editor.putString("userEmail", mUserName.getText().toString());
                 editor.commit();
                 nextActivity();
             }
@@ -81,6 +82,7 @@ public class login_activity extends AppCompatActivity {
     public void nextActivity(){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+
         Intent broadcastIntent = new Intent();
         broadcastIntent.setAction("com.package.ACTION_LOGIN");
         sendBroadcast(broadcastIntent);

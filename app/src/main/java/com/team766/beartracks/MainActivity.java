@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.firebase.client.Firebase;
@@ -29,11 +30,21 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private NavigationView nvDrawer;
     private Home_Fragment home_fragment;
+    private String userEmail;
+    static final String STATE_SELECTED_POSITION = "orientation";
+    private int mCurrentSelectedPosition = 0;
+    private boolean mFromSavedInstanceState = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState != null) {
+            mCurrentSelectedPosition =
+                    savedInstanceState.getInt(STATE_SELECTED_POSITION);
+            mFromSavedInstanceState = true;
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
@@ -88,22 +99,28 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.home_frag:
                 fragmentClass = Home_Fragment.class;
+                mCurrentSelectedPosition = 0;
                 break;
             case R.id.cal_frag:
                 fragmentClass = Calendar_Fragment.class;
+                mCurrentSelectedPosition = 1;
                 break;
             case R.id.groups_frag:
                 fragmentClass = Groups_Fragment.class;
+                mCurrentSelectedPosition = 2;
                 break;
             case R.id.people_frag:
                 fragmentClass = People_Fragment.class;
+                mCurrentSelectedPosition = 3;
                 break;
             case R.id.project_frag:
                 fragmentClass = Project_Fragment.class;
+                mCurrentSelectedPosition = 4;
                 break;
             //happy now Brett?
             default:
                 fragmentClass = Home_Fragment.class;
+                mCurrentSelectedPosition = 0;
         }
 
         try{
@@ -120,10 +137,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
+    }
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION, 0);
+        Menu menu = nvDrawer.getMenu();
+        menu.getItem(mCurrentSelectedPosition).setChecked(true);
+        selectDrawerItem(menu.getItem(mCurrentSelectedPosition).setChecked(true));
     }
 
 
