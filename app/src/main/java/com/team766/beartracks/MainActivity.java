@@ -48,11 +48,7 @@ public class MainActivity extends AppCompatActivity {
         }
         setupToolbar();
         setupNavDrawer();
-
-        settings = getSharedPreferences(welcome_screen.PREFS_NAME, MODE_PRIVATE);
-        userEmail = settings.getString("userEmail", "");
-        emailProfile = (TextView) findViewById(R.id.userEmailDisplay);
-        emailProfile.setText(userEmail);
+        setupNavDrawerHeader();
 
         fragmentManager = getSupportFragmentManager();
         //setup default fragment
@@ -73,6 +69,13 @@ public class MainActivity extends AppCompatActivity {
 
             mDrawerLayout.setDrawerListener(mDrawerToggle);
         }
+    }
+
+    private void setupNavDrawerHeader(){
+        settings = getSharedPreferences(welcome_screen.PREFS_NAME, MODE_PRIVATE);
+        userEmail = settings.getString("userEmail", "");
+        emailProfile = (TextView) findViewById(R.id.userEmailDisplay);
+        emailProfile.setText(userEmail);
     }
 
     private void setupToolbar(){

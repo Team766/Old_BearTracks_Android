@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -70,7 +71,10 @@ public class welcome_screen extends AppCompatActivity {
     }
 
     public void createNewAccount(View view){
-        Intent intent = new Intent(getApplicationContext(), create_account.class);
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse("https://www.team766.com"));
         startActivity(intent);
     }
 

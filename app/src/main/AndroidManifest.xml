@@ -28,9 +28,6 @@
             android:parentActivityName=".welcome_screen">
         </activity>
 
-        <activity android:name=".create_account"
-            android:label="Create New Account"
-            android:parentActivityName=".welcome_screen"/>
     </application>
 
 </manifest>
