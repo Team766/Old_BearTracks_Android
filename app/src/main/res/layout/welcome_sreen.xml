@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Bear Tracks"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="175dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/createAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Account"
+            android:layout_toRightOf="@+id/existingLogin"
+            android:onClick="createNewAccount"/>
+
+        <Button
+            android:id="@+id/existingLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Existing Login"
+            android:onClick="existingLogin"/>
+
+    </RelativeLayout>
+</LinearLayout>
