@@ -24,7 +24,8 @@
         </activity>
 
         <activity android:name=".login_activity"
-            android:label="Login Test">
+            android:label="Login Test"
+            android:parentActivityName=".welcome_screen">
         </activity>
 
         <activity android:name=".create_account"

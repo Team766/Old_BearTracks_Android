@@ -3,7 +3,11 @@ package com.team766.beartracks;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.preference.PreferenceManager;
 import android.widget.EditText;
@@ -33,8 +37,25 @@ public class login_activity extends AppCompatActivity {
 
         setContentView(R.layout.login_layout);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.Toolbar);
+        setSupportActionBar(toolbar);
+        setTitle("Login");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         mUserName = (EditText) findViewById(R.id.userName);
         passwordy = (EditText) findViewById(R.id.passwordy);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void passwordSubmit(View view){

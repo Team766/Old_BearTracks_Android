@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -35,6 +36,10 @@ public class welcome_screen extends AppCompatActivity {
         }
 
         setContentView(R.layout.welcome_sreen);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.Toolbar);
+        setSupportActionBar(toolbar);
+        setTitle("Welcome");
     }
 
     @Override

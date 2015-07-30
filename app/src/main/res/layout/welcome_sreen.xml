@@ -17,13 +17,22 @@
         android:text="Welcome to Bear Tracks"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:layout_gravity="center_horizontal"/>
+
+    <ImageView
+        android:layout_marginTop="55dp"
+        android:src="@drawable/bear_logo"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="175dp"
+        android:layout_marginTop="70dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:gravity="center">
