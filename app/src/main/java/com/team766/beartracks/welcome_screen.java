@@ -1,9 +1,13 @@
 package com.team766.beartracks;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -22,10 +26,19 @@ public class welcome_screen extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
         Firebase.setAndroidContext(this);
 
         settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.package.ACTION_LOGIN");
+        registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d("onReceive", "Login in progress");
+                finish();
+            }
+        }, intentFilter);
 
         if (settings.getBoolean("hasLoggedIn", false)) {
             moveToHome();

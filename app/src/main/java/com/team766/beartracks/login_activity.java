@@ -60,6 +60,9 @@ public class login_activity extends AppCompatActivity {
     public void nextActivity(){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("com.package.ACTION_LOGIN");
+        sendBroadcast(broadcastIntent);
         this.finish();
     }
 

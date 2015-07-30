@@ -42,6 +42,7 @@ public class create_account extends AppCompatActivity {
             @Override
             public void onError(FirebaseError firebaseError) {
                 // there was an error
+                errorToast();
             }
         });
     }
@@ -50,9 +51,16 @@ public class create_account extends AppCompatActivity {
         Toast.makeText(this, "Congrats on your new account", Toast.LENGTH_SHORT).show();
     }
 
+    private void errorToast(){
+        Toast.makeText(this, "Enter a valid email", Toast.LENGTH_SHORT).show();
+    }
+
     public void nextActivity(){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("com.package.ACTION_LOGIN");
+        sendBroadcast(broadcastIntent);
         this.finish();
     }
 
