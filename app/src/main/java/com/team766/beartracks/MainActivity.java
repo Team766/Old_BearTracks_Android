@@ -1,5 +1,6 @@
 package com.team766.beartracks;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         //setup default fragment
         Home_Fragment home_fragment = new Home_Fragment();
-        fragmentManager.beginTransaction().replace(R.id.content_holder, home_fragment).commit();
+        swapFragment(home_fragment);
 
     }
 
@@ -149,49 +150,46 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void selectDrawerItem(MenuItem item){
-        Fragment fragment = null;
+    private void swapFragment(Fragment fragment) {
+        fragmentManager.beginTransaction().replace(R.id.content_holder, fragment).commit();
+    }
 
-        Class fragmentClass;
+    public void selectDrawerItem(MenuItem item){
+
         switch (item.getItemId()){
             case R.id.home_frag:
-                fragmentClass = Home_Fragment.class;
+                swapFragment(new Home_Fragment());
                 mCurrentSelectedPosition = 0;
                 break;
             case R.id.cal_frag:
-                fragmentClass = Calendar_Fragment.class;
+                swapFragment(new Calendar_Fragment());
                 mCurrentSelectedPosition = 1;
                 break;
             case R.id.groups_frag:
-                fragmentClass = Groups_Fragment.class;
+                swapFragment(new Groups_Fragment());
                 mCurrentSelectedPosition = 2;
                 break;
             case R.id.people_frag:
-                fragmentClass = People_Fragment.class;
+                swapFragment(new People_Fragment());
                 mCurrentSelectedPosition = 3;
                 break;
             case R.id.project_frag:
-                fragmentClass = Project_Fragment.class;
+                swapFragment(new Project_Fragment());
                 mCurrentSelectedPosition = 4;
+                break;
+            case R.id.settings:
+                startActivity(new Intent(this, Settings.class));
+                mCurrentSelectedPosition = 5;
                 break;
             //happy now Brett?
             default:
-                fragmentClass = Home_Fragment.class;
+                swapFragment(new Home_Fragment());
                 mCurrentSelectedPosition = 0;
         }
-
-        try{
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        fragmentManager.beginTransaction().replace(R.id.content_holder, fragment).commit();
 
         item.setChecked(true);
         setTitle(item.getTitle());
         mDrawerLayout.closeDrawers();
-
     }
 
     public void onSaveInstanceState(Bundle outState) {

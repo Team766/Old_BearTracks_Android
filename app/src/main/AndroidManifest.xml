@@ -28,6 +28,9 @@
             android:parentActivityName=".welcome_screen">
         </activity>
 
+        <activity android:name=".Settings"
+            android:label="Settings"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

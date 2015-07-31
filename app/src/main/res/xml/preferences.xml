@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Settings">
+        <CheckBoxPreference
+            android:title="Random Checkbox"
+            android:summary="This is a placeholder"
+            android:key="placeholder"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="About this app">
+        <Preference
+            android:title="Source"
+            android:summary="View this app's source code"
+            android:key="viewSource"/>
+        <Preference
+            android:title="Open Source Licenses"
+            android:summary="Details for libraries in this app"
+            android:key="licenses"/>
+        <Preference
+            android:title="App Version"
+            android:enabled="false"
+            android:key="AppVersion"/>
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
