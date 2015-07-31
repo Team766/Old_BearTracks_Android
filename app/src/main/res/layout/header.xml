@@ -12,12 +12,12 @@
         android:scaleType="centerCrop"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/rodgers"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="55dp"
         android:id="@+id/circleView" />
     
     <TextView
@@ -26,8 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginBottom="20dp"
+        android:textSize="20sp"
         android:layout_margin="16dp"
-        android:textStyle="bold"
         android:textColor="@android:color/white" />
 
 
