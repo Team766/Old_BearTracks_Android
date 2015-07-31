@@ -63,7 +63,7 @@ public class login_activity extends AppCompatActivity {
             @Override
             public void onAuthenticated(AuthData authData) {
                 editor.putBoolean("hasLoggedIn", true);
-                editor.putString("userID", authData.getUid());
+                editor.putString("userEmail", mUserName.getText().toString());
                 editor.commit();
                 nextActivity();
             }

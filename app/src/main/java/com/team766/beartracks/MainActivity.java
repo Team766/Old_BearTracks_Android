@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private NavigationView nvDrawer;
     private Toolbar toolbar;
-    private String userId, tempPersonName, personName;
+    private String userEmail, personName, personEmail, email;
     private TextView emailProfile;
     static final String STATE_SELECTED_POSITION = "orientation";
     private int mCurrentSelectedPosition = 0;
@@ -53,11 +53,12 @@ public class MainActivity extends AppCompatActivity {
             mCurrentSelectedPosition =
                     savedInstanceState.getInt(STATE_SELECTED_POSITION);
         }
+
+        settings = getSharedPreferences(welcome_screen.PREFS_NAME, MODE_PRIVATE);
+
         setupToolbar();
         setupNavDrawer();
         setupNavDrawerHeader();
-
-        settings = getSharedPreferences(welcome_screen.PREFS_NAME, MODE_PRIVATE);
 
         fragmentManager = getSupportFragmentManager();
         //setup default fragment
@@ -85,19 +86,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupNavDrawerHeader(){
+        email = settings.getString("userEmail","");
+
         peopleRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     user = child.getValue(Person.class);
-                    tempPersonName = user.getName();
-                    if (tempPersonName.equals("Tommy Yu")) {
+                    personName = user.getName();
+                    personEmail = user.getEmail();
+                    if (personEmail.equals(email)) {
                         emailProfile = (TextView) findViewById(R.id.userEmailDisplay);
-                        emailProfile.setText(tempPersonName);
+                        emailProfile.setText(personName);
                         break;
                     }
-                    //makeToast("calling onDataChange");
-                    //makeToast(personName);
                 }
             }
 
