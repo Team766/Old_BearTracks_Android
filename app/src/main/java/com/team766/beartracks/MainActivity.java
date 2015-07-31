@@ -34,13 +34,14 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private NavigationView nvDrawer;
     private Toolbar toolbar;
-    private String userEmail, personName, personEmail, email;
-    private TextView emailProfile;
+    private String userEmail, emailChecker;
+    private TextView profileName;
     static final String STATE_SELECTED_POSITION = "orientation";
     private int mCurrentSelectedPosition = 0;
     private SharedPreferences settings;
+    private SharedPreferences.Editor editor;
     private Firebase peopleRef;
-    private Person user;
+    private Person User;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +56,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         settings = getSharedPreferences(welcome_screen.PREFS_NAME, MODE_PRIVATE);
+        editor = settings.edit();
+        userEmail = settings.getString("userEmail", "");
+        String personName = settings.getString("userName", "");
 
         setupToolbar();
         setupNavDrawer();
-        setupNavDrawerHeader();
+        profileName = (TextView) findViewById(R.id.userEmailDisplay);
+
+        if(personName.equals("")){
+            setProfileName();
+        }else{
+            profileName.setText(personName);
+        }
 
         fragmentManager = getSupportFragmentManager();
         //setup default fragment
@@ -85,27 +95,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setupNavDrawerHeader(){
-        email = settings.getString("userEmail","");
-
+    private void setProfileName(){
         peopleRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    user = child.getValue(Person.class);
-                    personName = user.getName();
-                    personEmail = user.getEmail();
-                    if (personEmail.equals(email)) {
-                        emailProfile = (TextView) findViewById(R.id.userEmailDisplay);
-                        emailProfile.setText(personName);
+                    User = child.getValue(Person.class);
+                    emailChecker = User.getEmail();
+                    if (emailChecker.equals(userEmail)) {
+                        profileName.setText(User.getName());
+                        editor.putString("userName", User.getName());
+                        editor.commit();
                         break;
                     }
+                    makeToast("Setting Up Profile Name");
                 }
             }
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
-                makeToast("error");
+                makeToast("You got yourself an error, try restarting the app");
             }
         });
     }

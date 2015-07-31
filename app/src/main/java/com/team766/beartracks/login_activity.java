@@ -24,7 +24,7 @@ public class login_activity extends AppCompatActivity {
 
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
-    private EditText mUserName, passwordy;
+    private EditText mUserName, mPassword;
     private Firebase ref;
 
     @Override
@@ -45,7 +45,7 @@ public class login_activity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         mUserName = (EditText) findViewById(R.id.userName);
-        passwordy = (EditText) findViewById(R.id.passwordy);
+        mPassword = (EditText) findViewById(R.id.passwordy);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class login_activity extends AppCompatActivity {
     }
 
     public void passwordSubmit(View view){
-        ref.authWithPassword(mUserName.getText().toString(), passwordy.getText().toString(), new Firebase.AuthResultHandler() {
+        ref.authWithPassword(mUserName.getText().toString(), mPassword.getText().toString(), new Firebase.AuthResultHandler() {
             @Override
             public void onAuthenticated(AuthData authData) {
                 editor.putBoolean("hasLoggedIn", true);
