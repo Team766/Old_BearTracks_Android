@@ -12,14 +12,14 @@
         android:scaleType="centerCrop"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:src="@drawable/rodgers"
+        android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="50dp"
-        android:id="@+id/circleView"
-        />
-
+        android:id="@+id/circleView" />
+    
     <TextView
         style="@style/TextAppearance.AppCompat.Subhead"
         android:id="@+id/userEmailDisplay"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="16dp"
-        android:text="Placeholder"
+        android:text="First Name, Last Name"
         android:textColor="@android:color/white" />
 
 

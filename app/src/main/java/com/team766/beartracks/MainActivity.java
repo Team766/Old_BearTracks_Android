@@ -1,7 +1,6 @@
 package com.team766.beartracks;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.content.res.Configuration;
@@ -16,8 +15,12 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.team766.beartracks.UI.Calendar_Fragment;
 import com.team766.beartracks.UI.Groups_Fragment;
 import com.team766.beartracks.UI.Home_Fragment;
@@ -30,17 +33,21 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private FragmentManager fragmentManager;
     private NavigationView nvDrawer;
-    private SharedPreferences settings;
     private Toolbar toolbar;
-    private String userEmail;
+    private String userId, tempPersonName, personName;
     private TextView emailProfile;
     static final String STATE_SELECTED_POSITION = "orientation";
     private int mCurrentSelectedPosition = 0;
+    private SharedPreferences settings;
+    private Firebase peopleRef;
+    private Person user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        peopleRef = new Firebase("https://beartracks.firebaseio.com/people/");
 
         if (savedInstanceState != null) {
             mCurrentSelectedPosition =
@@ -50,11 +57,17 @@ public class MainActivity extends AppCompatActivity {
         setupNavDrawer();
         setupNavDrawerHeader();
 
+        settings = getSharedPreferences(welcome_screen.PREFS_NAME, MODE_PRIVATE);
+
         fragmentManager = getSupportFragmentManager();
         //setup default fragment
         Home_Fragment home_fragment = new Home_Fragment();
         fragmentManager.beginTransaction().replace(R.id.content_holder, home_fragment).commit();
 
+    }
+
+    private void makeToast(String name){
+        Toast.makeText(this, name , Toast.LENGTH_SHORT).show();
     }
 
     private void setupNavDrawer(){
@@ -72,10 +85,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupNavDrawerHeader(){
-        settings = getSharedPreferences(welcome_screen.PREFS_NAME, MODE_PRIVATE);
-        userEmail = settings.getString("userEmail", "");
-        emailProfile = (TextView) findViewById(R.id.userEmailDisplay);
-        emailProfile.setText(userEmail);
+        peopleRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    user = child.getValue(Person.class);
+                    tempPersonName = user.getName();
+                    if (tempPersonName.equals("Tommy Yu")) {
+                        emailProfile = (TextView) findViewById(R.id.userEmailDisplay);
+                        emailProfile.setText(tempPersonName);
+                        break;
+                    }
+                    //makeToast("calling onDataChange");
+                    //makeToast(personName);
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                makeToast("error");
+            }
+        });
     }
 
     private void setupToolbar(){

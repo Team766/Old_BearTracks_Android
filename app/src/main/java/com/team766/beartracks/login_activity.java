@@ -30,7 +30,7 @@ public class login_activity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ref = new Firebase("https://beartracks.firebaseio.com");
+        ref = new Firebase("https://beartracks.firebaseio.com/people");
 
         settings = getSharedPreferences(welcome_screen.PREFS_NAME, MODE_PRIVATE);
         editor = settings.edit();
@@ -63,7 +63,7 @@ public class login_activity extends AppCompatActivity {
             @Override
             public void onAuthenticated(AuthData authData) {
                 editor.putBoolean("hasLoggedIn", true);
-                editor.putString("userEmail", mUserName.getText().toString());
+                editor.putString("userID", authData.getUid());
                 editor.commit();
                 nextActivity();
             }
