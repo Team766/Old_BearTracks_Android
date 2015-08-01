@@ -1,10 +1,12 @@
-package com.team766.beartracks;
+package com.team766.beartracks.Settings;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+
+import com.team766.beartracks.R;
 
 /**
  * Created by tommypacker on 7/31/15.

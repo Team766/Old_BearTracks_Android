@@ -1,14 +1,17 @@
-package com.team766.beartracks;
+package com.team766.beartracks.Settings;
 
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.team766.beartracks.R;
+import com.team766.beartracks.Settings.SettingsFragment;
 
 /**
  * Created by tommypacker on 7/31/15.
  */
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

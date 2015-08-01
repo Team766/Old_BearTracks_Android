@@ -28,7 +28,7 @@
             android:parentActivityName=".welcome_screen">
         </activity>
 
-        <activity android:name=".SettingsActivity"
+        <activity android:name=".Settings.SettingsActivity"
             android:label="Settings"
             android:parentActivityName=".MainActivity"/>
     </application>
