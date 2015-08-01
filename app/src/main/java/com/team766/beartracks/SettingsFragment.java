@@ -5,29 +5,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 /**
  * Created by tommypacker on 7/31/15.
  */
 public class SettingsFragment extends PreferenceFragment{
 
-
-    public static android.app.Fragment newInstance(){
-        SettingsFragment fragment = new SettingsFragment();
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(final Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
         Preference licenses = findPreference("licenses");
         Preference source = findPreference("viewSource");
-        Preference appVersion = findPreference("appVersion");
+        Preference appVersion = findPreference("AppVersion");
 
         source.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -37,8 +28,7 @@ public class SettingsFragment extends PreferenceFragment{
             }
         });
 
-        //appVersion.setTitle("Bear Tracks " + "0.0.");
-
+        appVersion.setTitle("Bear Tracks " + "0.0.0");
     }
 
     private boolean viewSource(){
@@ -49,5 +39,4 @@ public class SettingsFragment extends PreferenceFragment{
         startActivity(intent);
         return true;
     }
-
 }

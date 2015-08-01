@@ -21,7 +21,6 @@ import com.firebase.client.Firebase;
 public class welcome_screen extends AppCompatActivity {
 
     public static final String PREFS_NAME = "MyPrefsFile";
-    public BroadcastReceiver receiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
