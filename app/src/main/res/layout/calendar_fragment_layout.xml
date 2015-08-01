@@ -13,13 +13,14 @@
         app:textSize="12sp"
         app:hourHeight="60dp"
         app:headerColumnPadding="8dp"
-        app:headerColumnTextColor="#8f000000"
+        app:headerColumnTextColor="#c13e3e"
         app:headerRowPadding="12dp"
-        app:columnGap="8dp"
+        app:columnGap="0dp"
         app:noOfVisibleDays="3"
         app:headerRowBackgroundColor="#ffefefef"
         app:dayBackgroundColor="#05000000"
-        app:todayBackgroundColor="#1848adff"
-        app:headerColumnBackground="#ffffffff"/>
+        app:todayBackgroundColor="#ffe38f"
+        app:headerColumnBackground="#ffffffff"
+        app:todayHeaderTextColor="#c13e3e"/>
 
 </LinearLayout>
