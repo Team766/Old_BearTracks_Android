@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                 setTitle(item.getTitle());
                 break;
             case R.id.settings:
-                startActivity(new Intent(this, Settings.class));
+                startActivity(new Intent(this, SettingsActivity.class));
                 mCurrentSelectedPosition = 5;
                 break;
             //happy now Brett?

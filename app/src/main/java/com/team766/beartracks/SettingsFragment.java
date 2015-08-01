@@ -5,16 +5,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.LinearLayout;
 
-
+/**
+ * Created by tommypacker on 7/31/15.
+ */
 public class SettingsFragment extends PreferenceFragment{
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(final Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
@@ -31,10 +29,7 @@ public class SettingsFragment extends PreferenceFragment{
         });
 
         appVersion.setTitle("Bear Tracks " + "0.0.0");
-
     }
-
-
 
     private boolean viewSource(){
         Intent intent = new Intent();
@@ -44,5 +39,4 @@ public class SettingsFragment extends PreferenceFragment{
         startActivity(intent);
         return true;
     }
-
 }
