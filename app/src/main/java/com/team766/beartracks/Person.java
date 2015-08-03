@@ -6,6 +6,8 @@ package com.team766.beartracks;
 public class Person {
     private String email;
     private String name;
+    private String status;
+    private String id;
 
     @SuppressWarnings("unused")
     public Person(){
@@ -17,6 +19,14 @@ public class Person {
 
     public String getEmail(){
         return email;
+    }
+
+    public String getStatus(){
+        return status;
+    }
+
+    public String getId(){
+        return id;
     }
 
 }

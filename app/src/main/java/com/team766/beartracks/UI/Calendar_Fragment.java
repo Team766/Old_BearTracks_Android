@@ -11,6 +11,11 @@ import android.widget.Toast;
 
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.team766.beartracks.CalendarEvent;
 import com.team766.beartracks.MainActivity;
 import com.team766.beartracks.R;
 
@@ -27,27 +32,42 @@ import java.util.Locale;
 public class Calendar_Fragment extends Fragment implements WeekView.EventClickListener, WeekView.MonthChangeListener, WeekView.EventLongPressListener {
 
     private WeekView mWeekView;
+    private List<WeekViewEvent> preEvents = new ArrayList<WeekViewEvent>();
+    private CalendarEvent calEvent;
+    private Firebase calRef;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.calendar_fragment_layout, container, false);
 
-        // Get a reference for the week view in the layout.
+        calRef = new Firebase("https://beartracks.firebaseio.com/calendarEvents/");
+
         mWeekView = (WeekView) view.findViewById(R.id.weekView);
-
-        // Set an action when any event is clicked.
         mWeekView.setOnEventClickListener(this);
-
-        // The week view has infinite scrolling horizontally. We have to provide the events of a
-        // month every time the month changes on the week view.
         mWeekView.setMonthChangeListener(this);
-
-        // Set long press listener for events.
         mWeekView.setEventLongPressListener(this);
-
         mWeekView.setNumberOfVisibleDays(3);
 
+        calRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot events : dataSnapshot.getChildren()) {
+                    calEvent = events.getValue(CalendarEvent.class);
+                    preEvents.add(getEvent(calEvent.getStart(), calEvent.getEnd(), calEvent.getTitle()));
+                }
+                mWeekView.notifyDatasetChanged();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+            }
+        });
+
         return view;
+    }
+
+    private void makeToast(String name){
+        Toast.makeText(getActivity(), name, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -57,17 +77,18 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
 
     @Override
     public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-        List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
+        ArrayList<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
-        if(newMonth == 9){
-
-            events.add(getEvent("2015-7-24 17:00:00", "2015-7-24 21:00:00" ));
+        if(newMonth == 8){
+            for(int i = 0; i<preEvents.size(); i++){
+                events.add(preEvents.get(i));
+            }
         }
 
         return events;
     }
 
-    private WeekViewEvent getEvent(String start, String end){
+    private WeekViewEvent getEvent(String start, String end, String title){
         Calendar startTime = Calendar.getInstance();
         Calendar endTime = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
@@ -78,7 +99,7 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
             //Nothing
         }
 
-        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime, "From Concept to Reality"), startTime, endTime);
+        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime, title), startTime, endTime);
         event.setColor(getResources().getColor(R.color.primary));
         return event;
     }
