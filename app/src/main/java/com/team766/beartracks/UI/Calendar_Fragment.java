@@ -19,10 +19,12 @@ import com.team766.beartracks.CalendarEvent;
 import com.team766.beartracks.MainActivity;
 import com.team766.beartracks.R;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -78,8 +80,12 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
     @Override
     public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         ArrayList<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int month = cal.get(Calendar.MONTH);
 
-        if(newMonth == 8){
+        if(newMonth == month){
             for(int i = 0; i<preEvents.size(); i++){
                 events.add(preEvents.get(i));
             }
