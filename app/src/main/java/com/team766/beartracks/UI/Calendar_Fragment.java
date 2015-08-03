@@ -14,9 +14,12 @@ import com.alamkanak.weekview.WeekViewEvent;
 import com.team766.beartracks.MainActivity;
 import com.team766.beartracks.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by tommypacker on 7/28/15.
@@ -47,7 +50,6 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         return view;
     }
 
-
     @Override
     public void onEventClick(WeekViewEvent event, RectF rectF) {
         Toast.makeText(this.getActivity(), "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
@@ -57,24 +59,32 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
     public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
-        Calendar startTime = Calendar.getInstance();
-        startTime.set(Calendar.HOUR_OF_DAY, 3);
-        startTime.set(Calendar.MINUTE, 0);
-        startTime.set(Calendar.MONTH, newMonth-1);
-        startTime.set(Calendar.YEAR, newYear);
-        Calendar endTime = (Calendar) startTime.clone();
-        endTime.add(Calendar.HOUR, 1);
-        endTime.set(Calendar.MONTH, newMonth-1);
-        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
-        event.setColor(getResources().getColor(R.color.primary));
-        events.add(event);
+        if(newMonth == 9){
 
+            events.add(getEvent("2015-7-24 17:00:00", "2015-7-24 21:00:00" ));
+        }
 
         return events;
     }
 
-    private String getEventTitle(Calendar time) {
-        return String.format("New Event at %02d:%02d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
+    private WeekViewEvent getEvent(String start, String end){
+        Calendar startTime = Calendar.getInstance();
+        Calendar endTime = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+        try {
+            startTime.setTime(sdf.parse(start));
+            endTime.setTime(sdf.parse(end));
+        } catch (ParseException e){
+            //Nothing
+        }
+
+        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime, "From Concept to Reality"), startTime, endTime);
+        event.setColor(getResources().getColor(R.color.primary));
+        return event;
+    }
+
+    private String getEventTitle(Calendar time, String title) {
+        return String.format(title + " at %02d:%02d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
     }
 
     @Override

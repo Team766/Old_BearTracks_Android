@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.commit();
                         break;
                     }
-                    makeToast("Setting Up Profile Name");
                 }
             }
 
