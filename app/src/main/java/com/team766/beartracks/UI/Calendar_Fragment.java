@@ -55,7 +55,7 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot events : dataSnapshot.getChildren()) {
                     calEvent = events.getValue(CalendarEvent.class);
-                    preEvents.add(getEvent(calEvent.getStart(), calEvent.getEnd(), calEvent.getTitle()));
+                    preEvents.add(getEvent(calEvent.getStart(), calEvent.getEnd(), calEvent.getTitle(), calEvent.getDescription()));
                 }
                 mWeekView.notifyDatasetChanged();
             }
@@ -94,7 +94,7 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         return events;
     }
 
-    private WeekViewEvent getEvent(String start, String end, String title){
+    private WeekViewEvent getEvent(String start, String end, String title, String description){
         Calendar startTime = Calendar.getInstance();
         Calendar endTime = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
@@ -105,13 +105,13 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
             //Nothing
         }
 
-        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime, title), startTime, endTime);
+        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime, title, description), startTime, endTime);
         event.setColor(getResources().getColor(R.color.primary));
         return event;
     }
 
-    private String getEventTitle(Calendar time, String title) {
-        return String.format(title + " at %02d:%02d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
+    private String getEventTitle(Calendar time, String title, String description) {
+        return String.format(title + " at %02d:%02d" + "\n\n" + description, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
     }
 
     @Override
