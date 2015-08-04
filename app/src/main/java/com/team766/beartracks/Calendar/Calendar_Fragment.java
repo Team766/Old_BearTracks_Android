@@ -1,5 +1,6 @@
 package com.team766.beartracks.Calendar;
 
+import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.team766.beartracks.R;
+import com.team766.beartracks.Settings.SettingsActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,12 +43,13 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
     private int mWeekViewType = TYPE_THREE_DAY_VIEW;
     private List<WeekViewEvent> preEvents = new ArrayList<WeekViewEvent>();
     private CalendarEvent calEvent;
+    private Firebase calRef;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.calendar_fragment_layout, container, false);
 
-        Firebase calRef = new Firebase("https://beartracks.firebaseio.com/calendarEvents/");
+        calRef = new Firebase("https://beartracks.firebaseio.com/calendarEvents/");
 
         setHasOptionsMenu(true);
 
@@ -57,6 +60,14 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         mWeekView.setNumberOfVisibleDays(3);
         mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
 
+        if(savedInstanceState == null){
+            setupCalendarEvents();
+        }
+
+        return view;
+    }
+
+    private void setupCalendarEvents(){
         calRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -71,8 +82,6 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
             public void onCancelled(FirebaseError firebaseError) {
             }
         });
-
-        return view;
     }
 
     @Override
@@ -145,7 +154,6 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
                 return weekday.toUpperCase() + format.format(date.getTime());
             }
 
-            //Get that 12 hour time instead of that 24 hour BS
             @Override
             public String interpretTime(int hour) {
                 return hour > 11 ? (hour - 12) + " PM" : (hour == 0 ? "12 AM" : hour + " AM");
@@ -153,10 +161,9 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         });
     }
 
-
     @Override
     public void onEventClick(WeekViewEvent event, RectF rectF) {
-        Toast.makeText(this.getActivity(), "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this.getActivity(), Event_Details.class));
     }
 
     @Override

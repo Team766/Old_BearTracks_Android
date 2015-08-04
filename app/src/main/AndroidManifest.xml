@@ -31,6 +31,9 @@
         <activity android:name=".Settings.SettingsActivity"
             android:label="Settings"
             android:parentActivityName=".MainActivity"/>
+        <activity android:name=".Calendar.Event_Details"
+            android:label="Event Details"/>
+
     </application>
 
 </manifest>
