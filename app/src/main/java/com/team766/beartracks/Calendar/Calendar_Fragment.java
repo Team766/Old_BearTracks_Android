@@ -1,10 +1,9 @@
-package com.team766.beartracks.UI;
+package com.team766.beartracks.Calendar;
 
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -15,11 +14,8 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-import com.team766.beartracks.CalendarEvent;
-import com.team766.beartracks.MainActivity;
 import com.team766.beartracks.R;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,13 +32,12 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
     private WeekView mWeekView;
     private List<WeekViewEvent> preEvents = new ArrayList<WeekViewEvent>();
     private CalendarEvent calEvent;
-    private Firebase calRef;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.calendar_fragment_layout, container, false);
 
-        calRef = new Firebase("https://beartracks.firebaseio.com/calendarEvents/");
+        Firebase calRef = new Firebase("https://beartracks.firebaseio.com/calendarEvents/");
 
         mWeekView = (WeekView) view.findViewById(R.id.weekView);
         mWeekView.setOnEventClickListener(this);
@@ -68,10 +63,6 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         return view;
     }
 
-    private void makeToast(String name){
-        Toast.makeText(getActivity(), name, Toast.LENGTH_SHORT).show();
-    }
-
     @Override
     public void onEventClick(WeekViewEvent event, RectF rectF) {
         Toast.makeText(this.getActivity(), "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
@@ -90,7 +81,6 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
                 events.add(preEvents.get(i));
             }
         }
-
         return events;
     }
 

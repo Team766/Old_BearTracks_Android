@@ -1,6 +1,7 @@
-package com.team766.beartracks;
+package com.team766.beartracks.Calendar;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.team766.beartracks.Person;
 
 import java.util.List;
 
