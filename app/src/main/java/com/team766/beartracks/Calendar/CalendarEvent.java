@@ -18,6 +18,8 @@ public class CalendarEvent {
     private List<Person> people;
     private String title;
     private List<subEvent> subevents;
+    private String meals;
+    private String supervision;
 
     public CalendarEvent(){}
 
@@ -56,5 +58,12 @@ public class CalendarEvent {
         return creator;
     }
 
+    public String getMeals(){
+        return meals;
+    }
+
+    public String getSupervision(){
+        return supervision;
+    }
 
 }
