@@ -33,6 +33,9 @@
             android:label="Settings"
             android:parentActivityName=".MainActivity"/>
 
+        <activity android:name=".Person_Details"
+            android:label="Person Details"/>
+
     </application>
 
 </manifest>

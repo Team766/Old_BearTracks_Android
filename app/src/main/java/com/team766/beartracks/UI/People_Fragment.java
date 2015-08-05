@@ -1,5 +1,6 @@
 package com.team766.beartracks.UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -16,6 +17,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.team766.beartracks.Person;
+import com.team766.beartracks.Person_Details;
 import com.team766.beartracks.R;
 import com.team766.beartracks.UserAdapter;
 
@@ -29,6 +31,7 @@ public class People_Fragment extends Fragment {
     private ArrayList<Person> roster = new ArrayList<Person>();
     private Person teamMember;
     UserAdapter adapter;
+    private String firebaseURL = "https://beartracks.firebaseio.com";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -43,7 +46,12 @@ public class People_Fragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Person item = (Person) adapter.getItem(position);
-                makeToast(item.getKey());
+                String key = item.getKey();
+                Bundle b = new Bundle();
+                b.putString("FirebaseKey", key);
+                Intent intent = new Intent(getActivity(), Person_Details.class);
+                intent.putExtras(b);
+                startActivity(intent);
             }
         });
 
@@ -52,7 +60,7 @@ public class People_Fragment extends Fragment {
 
 
     private void setupRoster(){
-        Firebase peopleRef = new Firebase("https://beartracks.firebaseio.com/people/");
+        Firebase peopleRef = new Firebase(firebaseURL).child("people");
 
         peopleRef.addValueEventListener(new ValueEventListener() {
             @Override

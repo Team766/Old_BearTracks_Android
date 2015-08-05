@@ -17,11 +17,8 @@ import java.util.ArrayList;
  */
 public class UserAdapter extends ArrayAdapter<Person> {
 
-    private ArrayList<Person> users;
-
     public UserAdapter(Context context, ArrayList<Person> users) {
         super(context, 0, users);
-        this.users = users;
     }
 
     @Override
