@@ -17,8 +17,11 @@ import java.util.ArrayList;
  */
 public class UserAdapter extends ArrayAdapter<Person> {
 
+    private ArrayList<Person> users;
+
     public UserAdapter(Context context, ArrayList<Person> users) {
         super(context, 0, users);
+        this.users = users;
     }
 
     @Override
@@ -34,12 +37,11 @@ public class UserAdapter extends ArrayAdapter<Person> {
         Picasso.with(this.getContext()).load(picURL).resize(150,150).centerCrop().into(profPic);
 
 
+        
         TextView memberName = (TextView) convertView.findViewById(R.id.name);
-
         memberName.setText(member.getName());
 
         return convertView;
     }
-
 
 }

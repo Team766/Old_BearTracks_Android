@@ -15,6 +15,7 @@ public class Person {
     private String phone;
     private String photo;
     private List<Person> associated;
+    private String key;
 
     @SuppressWarnings("unused")
     public Person(){
@@ -54,5 +55,13 @@ public class Person {
 
     public int getGraduation(){
         return graduation;
+    }
+
+    public void setKey(String key){
+        this.key = key;
+    }
+
+    public String getKey(){
+        return key;
     }
 }

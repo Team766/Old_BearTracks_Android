@@ -6,9 +6,11 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -33,14 +35,21 @@ public class People_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.roster, container, false);
 
         adapter = new UserAdapter(getActivity(), roster);
-
         ListView listView = (ListView) view.findViewById(R.id.list);
         listView.setAdapter(adapter);
-
         setupRoster();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Person item = (Person) adapter.getItem(position);
+                makeToast(item.getKey());
+            }
+        });
 
         return view;
     }
+
 
     private void setupRoster(){
         Firebase peopleRef = new Firebase("https://beartracks.firebaseio.com/people/");
@@ -48,9 +57,11 @@ public class People_Fragment extends Fragment {
         peopleRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot people: dataSnapshot.getChildren()){
+                for (DataSnapshot people : dataSnapshot.getChildren()) {
                     teamMember = people.getValue(Person.class);
+                    teamMember.setKey(people.getKey());
                     roster.add(teamMember);
+                    //makeToast(people.getKey());
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -60,4 +71,10 @@ public class People_Fragment extends Fragment {
             }
         });
     }
+
+    private void makeToast(String name){
+        Toast.makeText(getActivity(), name, Toast.LENGTH_SHORT).show();
+    }
+
+
 }
