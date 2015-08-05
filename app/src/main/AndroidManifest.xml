@@ -3,6 +3,7 @@
     package="com.team766.beartracks" >
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -31,8 +32,6 @@
         <activity android:name=".Settings.SettingsActivity"
             android:label="Settings"
             android:parentActivityName=".MainActivity"/>
-        <activity android:name=".Calendar.Event_Details"
-            android:label="Event Details"/>
 
     </application>
 
