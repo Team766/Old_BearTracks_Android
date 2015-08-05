@@ -20,6 +20,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.team766.beartracks.MainActivity;
 import com.team766.beartracks.R;
 import com.team766.beartracks.Settings.SettingsActivity;
 
@@ -163,6 +164,7 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF rectF) {
+        Toast.makeText(getActivity(), event.getName(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -203,7 +205,7 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
 
     @Override
     public void onEventLongPress(WeekViewEvent event, RectF rectF) {
-        Toast.makeText(this.getActivity(), "Long pressed event: " + event.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getActivity(),event.getName(), Toast.LENGTH_LONG).show();
     }
 
 
