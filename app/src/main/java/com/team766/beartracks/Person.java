@@ -1,5 +1,7 @@
 package com.team766.beartracks;
 
+import java.util.List;
+
 /**
  * Created by tommypacker on 7/30/15.
  */
@@ -8,6 +10,11 @@ public class Person {
     private String name;
     private String status;
     private String id;
+    private int supervisor;
+    private int graduation;
+    private String phone;
+    private String photo;
+    private List<Person> associated;
 
     @SuppressWarnings("unused")
     public Person(){
@@ -29,4 +36,23 @@ public class Person {
         return id;
     }
 
+    public String getPhone(){
+        return phone;
+    }
+
+    public String getPhoto(){
+        return photo;
+    }
+
+    public List<Person> getAssociated(){
+        return associated;
+    }
+
+    public int getSupervisor(){
+        return supervisor;
+    }
+
+    public int getGraduation(){
+        return graduation;
+    }
 }
