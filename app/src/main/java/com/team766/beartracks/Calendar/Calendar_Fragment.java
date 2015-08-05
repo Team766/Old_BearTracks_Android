@@ -163,7 +163,6 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF rectF) {
-        startActivity(new Intent(this.getActivity(), Event_Details.class));
     }
 
     @Override
