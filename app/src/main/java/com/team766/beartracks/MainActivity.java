@@ -30,7 +30,7 @@ import com.team766.beartracks.Calendar.Calendar_Fragment;
 import com.team766.beartracks.UI.Groups_Fragment;
 import com.team766.beartracks.UI.Home_Fragment;
 import com.team766.beartracks.Roster.People_Fragment;
-import com.team766.beartracks.UI.Role_Fragment;
+import com.team766.beartracks.Role.Role_Fragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -76,7 +76,12 @@ public class MainActivity extends AppCompatActivity {
 
         if(personName.equals("")){
             setProfileName();
-        }else{
+        }
+        else if(picURL.equals("")){
+            editor.putString("picURL", "https://pbs.twimg.com/profile_images/1307271994/image.jpg");
+            editor.commit();
+        }
+        else{
             profileName.setText(personName);
             Picasso.with(getApplicationContext()).load(picURL).fit().centerCrop().into(profPic);
         }

@@ -15,6 +15,7 @@ public class Role {
     private String status;
     private String supervisor;
     private String container;
+    private String key;
     private List<Accountability> accountabilities;
     private List<Authority> authorities;
     private List<Attachment> attachments;
@@ -51,6 +52,14 @@ public class Role {
 
     public String getContainer(){
         return container;
+    }
+
+    public void setKey(String key){
+        this.key = key;
+    }
+
+    public String getKey(){
+        return key;
     }
 
     public List<Accountability> getAccountabilities(){
