@@ -32,8 +32,6 @@ public class UserAdapter extends ArrayAdapter<Person> {
         ImageView profPic = (ImageView) convertView.findViewById(R.id.profilePicture);
         String picURL = member.getPhoto();
         Picasso.with(this.getContext()).load(picURL).resize(150,150).centerCrop().into(profPic);
-
-
         
         TextView memberName = (TextView) convertView.findViewById(R.id.name);
         memberName.setText(member.getName());

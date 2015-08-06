@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,33 +9,51 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Name"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"/>
+        android:layout_below="@+id/personDetails_toolbar">
 
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Email"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"/>
+        <ImageView
+            android:id="@+id/userPicture"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@string/ProfPicDescription" />
 
-    <TextView
-        android:id="@+id/phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="phone"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/name"
+            android:layout_toRightOf="@+id/userPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Name"
+            android:textSize="15sp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_toRightOf="@+id/userPicture"
+            android:layout_below="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Email"
+            android:textSize="15sp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_below="@+id/email"
+            android:layout_toRightOf="@+id/userPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="Phone"
+            android:textSize="15sp"
+            android:layout_marginTop="20dp"/>
+
+    </RelativeLayout>
 
 
-
-</LinearLayout>
+</RelativeLayout>
