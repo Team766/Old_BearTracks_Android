@@ -1,9 +1,8 @@
-package com.team766.beartracks.UI;
+package com.team766.beartracks.Roster;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +10,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-import com.team766.beartracks.Person;
-import com.team766.beartracks.Person_Details;
 import com.team766.beartracks.R;
-import com.team766.beartracks.UserAdapter;
 
 import java.util.ArrayList;
 

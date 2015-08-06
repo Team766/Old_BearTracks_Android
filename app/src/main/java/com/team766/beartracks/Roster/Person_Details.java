@@ -1,4 +1,4 @@
-package com.team766.beartracks;
+package com.team766.beartracks.Roster;
 
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -13,6 +13,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.team766.beartracks.R;
 
 /**
  * Created by tommypacker on 8/5/15.

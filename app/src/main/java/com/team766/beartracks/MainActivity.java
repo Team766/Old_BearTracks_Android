@@ -22,12 +22,17 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.squareup.picasso.Picasso;
+import com.team766.beartracks.Login.welcome_screen;
+import com.team766.beartracks.Roster.Person;
 import com.team766.beartracks.Settings.SettingsActivity;
 import com.team766.beartracks.Calendar.Calendar_Fragment;
 import com.team766.beartracks.UI.Groups_Fragment;
 import com.team766.beartracks.UI.Home_Fragment;
-import com.team766.beartracks.UI.People_Fragment;
+import com.team766.beartracks.Roster.People_Fragment;
 import com.team766.beartracks.UI.Project_Fragment;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -36,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private NavigationView nvDrawer;
     private Toolbar toolbar;
-    private String userEmail, emailChecker;
+    private String userEmail, emailChecker, picURL;
     private TextView profileName;
     static final String STATE_SELECTED_POSITION = "orientation";
     private int mCurrentSelectedPosition = 0;
@@ -44,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private Firebase peopleRef;
     private Person User;
+    private CircleImageView profPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,15 +67,18 @@ public class MainActivity extends AppCompatActivity {
         editor = settings.edit();
         userEmail = settings.getString("userEmail", "");
         String personName = settings.getString("userName", "");
+        picURL = settings.getString("picURL", "");
 
         setupToolbar();
         setupNavDrawer();
         profileName = (TextView) findViewById(R.id.userEmailDisplay);
+        profPic = (CircleImageView) findViewById(R.id.circleView);
 
         if(personName.equals("")){
             setProfileName();
         }else{
             profileName.setText(personName);
+            Picasso.with(getApplicationContext()).load(picURL).fit().centerCrop().into(profPic);
         }
 
         fragmentManager = getSupportFragmentManager();
@@ -106,7 +115,9 @@ public class MainActivity extends AppCompatActivity {
                     emailChecker = User.getEmail();
                     if (emailChecker.equals(userEmail)) {
                         profileName.setText(User.getName());
+                        Picasso.with(getApplicationContext()).load(User.getPhoto()).fit().centerCrop().into(profPic);
                         editor.putString("userName", User.getName());
+                        editor.putString("picURL", User.getPhoto());
                         editor.commit();
                         break;
                     }

@@ -1,19 +1,17 @@
-package com.team766.beartracks;
+package com.team766.beartracks.Login;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import com.firebase.client.Firebase;
+import com.team766.beartracks.Login.login_activity;
+import com.team766.beartracks.MainActivity;
+import com.team766.beartracks.R;
 
 /**
  * Created by tommypacker on 7/29/15.

@@ -15,7 +15,7 @@
             android:label="@string/app_name" >
         </activity>
 
-        <activity android:name=".welcome_screen"
+        <activity android:name=".Login.welcome_screen"
             android:label="Bear Tracks">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,16 +24,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".login_activity"
-            android:label="Login Test"
-            android:parentActivityName=".welcome_screen">
+        <activity android:name=".Login.login_activity"
+            android:label="Login"
+            android:parentActivityName=".Login.welcome_screen">
         </activity>
 
         <activity android:name=".Settings.SettingsActivity"
             android:label="Settings"
             android:parentActivityName=".MainActivity"/>
 
-        <activity android:name=".Person_Details"
+        <activity android:name=".Roster.Person_Details"
             android:label="Person Details" />
 
     </application>

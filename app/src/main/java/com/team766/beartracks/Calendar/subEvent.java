@@ -1,6 +1,6 @@
 package com.team766.beartracks.Calendar;
 
-import com.team766.beartracks.Person;
+import com.team766.beartracks.Roster.Person;
 
 import java.util.List;
 

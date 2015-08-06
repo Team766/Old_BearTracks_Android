@@ -1,21 +1,21 @@
-package com.team766.beartracks;
+package com.team766.beartracks.Login;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.preference.PreferenceManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.team766.beartracks.MainActivity;
+import com.team766.beartracks.R;
 
 /**
  * Created by tommypacker on 7/29/15.

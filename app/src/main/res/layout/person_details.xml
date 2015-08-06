@@ -31,6 +31,7 @@
             android:layout_gravity="center_horizontal"
             android:text="Name"
             android:textSize="25sp"
+            android:textStyle="bold"
             android:layout_marginTop="15dp" />
 
     </LinearLayout>

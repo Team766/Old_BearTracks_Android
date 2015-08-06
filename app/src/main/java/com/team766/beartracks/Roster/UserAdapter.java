@@ -1,4 +1,4 @@
-package com.team766.beartracks;
+package com.team766.beartracks.Roster;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.team766.beartracks.R;
+import com.team766.beartracks.Roster.Person;
 
 import java.util.ArrayList;
 
