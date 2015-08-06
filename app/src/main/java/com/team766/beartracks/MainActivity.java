@@ -30,7 +30,7 @@ import com.team766.beartracks.Calendar.Calendar_Fragment;
 import com.team766.beartracks.UI.Groups_Fragment;
 import com.team766.beartracks.UI.Home_Fragment;
 import com.team766.beartracks.Roster.People_Fragment;
-import com.team766.beartracks.UI.Project_Fragment;
+import com.team766.beartracks.UI.Role_Fragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -192,8 +192,8 @@ public class MainActivity extends AppCompatActivity {
                 item.setChecked(true);
                 setTitle(item.getTitle());
                 break;
-            case R.id.project_frag:
-                swapFragment(new Project_Fragment());
+            case R.id.role_frag:
+                swapFragment(new Role_Fragment());
                 mCurrentSelectedPosition = 4;
                 item.setChecked(true);
                 setTitle(item.getTitle());

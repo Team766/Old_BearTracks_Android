@@ -1,4 +1,4 @@
-package com.team766.beartracks;
+package com.team766.beartracks.Role;
 
 /**
  * Created by tommypacker on 8/6/15.
@@ -11,11 +11,11 @@ public class Attachment {
     public Attachment(){
     }
 
-    private String getName(){
+    public String getName(){
         return name;
     }
 
-    private String getUrl(){
+    public String getUrl(){
         return url;
     }
 

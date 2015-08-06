@@ -1,4 +1,4 @@
-package com.team766.beartracks;
+package com.team766.beartracks.Role;
 
 import java.util.List;
 
@@ -14,49 +14,54 @@ public class Role {
     private String owner;
     private String status;
     private String supervisor;
-    private List<String> accountabilities;
-    private List<String> authorities;
+    private String container;
+    private List<Accountability> accountabilities;
+    private List<Authority> authorities;
     private List<Attachment> attachments;
 
     public Role(){}
 
-    private String getCreator(){
+    public String getCreator(){
         return creator;
     }
 
-    private String getGrade(){
+    public String getGrade(){
         return grade;
     }
 
-    private String getMentor(){
+    public String getMentor(){
         return mentor;
     }
 
-    private String getName(){
+    public String getName(){
         return name;
     }
 
-    private String getOwner(){
+    public String getOwner(){
         return owner;
     }
 
-    private String getStatus(){
+    public String getStatus(){
         return status;
     }
 
-    private String getSupervisor(){
+    public String getSupervisor(){
         return supervisor;
     }
 
-    private List<String> getAccountabilities(){
+    public String getContainer(){
+        return container;
+    }
+
+    public List<Accountability> getAccountabilities(){
         return accountabilities;
     }
 
-    private List<String> getAuthorities(){
+    public List<Authority> getAuthorities(){
         return authorities;
     }
 
-    private List<Attachment> getAttachments(){
+    public List<Attachment> getAttachments(){
         return attachments;
     }
 

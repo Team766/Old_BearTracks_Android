@@ -24,9 +24,9 @@
             android:icon="@drawable/ic_pplicon"
             android:title="People" />
         <item
-            android:id="@+id/project_frag"
+            android:id="@+id/role_frag"
             android:icon="@drawable/ic_projecticon"
-            android:title="Projects" />
+            android:title="Roles" />
     </group>
 
     <group
