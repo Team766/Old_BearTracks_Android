@@ -7,7 +7,7 @@ The BearTracks Android app is the mobile companion to the BearTracks Web App tha
   - **Role View** to track Students and their roles on the team.
   - And much, much more! (eventually)
 
-BearTracks is designed with one goal in mind: unify the various disparate services [Team766] currently uses to manage team activities.
+BearTracks is designed with one goal in mind: unify the various disparate services [Team766](https://github.com/Team766) currently uses to manage team activities.
 
 All planned functionality is described in detail in the [BearTracks Google Doc].
 
@@ -18,8 +18,13 @@ All planned functionality is described in detail in the [BearTracks Google Doc].
 
 BearTracks Mobile utilizes:
 
-The Android Open Source Project
+-The Android Open Source Project
+-[CircleImageView](https://github.com/hdodenhof/CircleImageView)
+-[Firebase](https://www.firebase.com/)
+-[Android Week View](https://github.com/alamkanak/Android-Week-View)
+-[Picasso](http://square.github.io/picasso/)
+
 
 ### Dev 
 
-Made by [Tommy Yu] for [Team766] during the Summer of 2015.
+Made by [Tommy Yu](https://github.com/tommypacker) for [Team766](https://github.com/Team766) during the Summer of 2015.
