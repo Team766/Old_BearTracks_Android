@@ -37,6 +37,9 @@ public class Person_Details extends AppCompatActivity {
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.personDetails_toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
 
         name = (TextView) findViewById(R.id.name);
         email = (TextView) findViewById(R.id.email);
@@ -47,11 +50,11 @@ public class Person_Details extends AppCompatActivity {
 
         fireKey = extras.getString("FirebaseKey");
 
-        setTexts();
+        setUserInfo();
 
     }
 
-    private void setTexts(){
+    private void setUserInfo(){
         Firebase peopleDetsRef = new Firebase(firebaseURL).child(fireKey);
         peopleDetsRef.addValueEventListener(new ValueEventListener() {
             @Override

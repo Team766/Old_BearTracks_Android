@@ -34,7 +34,8 @@
             android:parentActivityName=".MainActivity"/>
 
         <activity android:name=".Roster.Person_Details"
-            android:label="Person Details" />
+            android:label="Person Details"
+            />
 
     </application>
 
