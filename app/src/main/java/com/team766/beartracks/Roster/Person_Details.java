@@ -60,7 +60,7 @@ public class Person_Details extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot detail : dataSnapshot.getChildren()) {
-                    String holder = detail.getValue().toString();
+                    String holder = (String) detail.getValue();
                     switch (detail.getKey()) {
                         case "name":
                             name.setText(holder);

@@ -2,6 +2,7 @@ package com.team766.beartracks.Role;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.firebase.client.DataSnapshot;
@@ -9,6 +10,10 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.team766.beartracks.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by tommypacker on 8/6/15.
@@ -19,10 +24,12 @@ public class Role_Details extends AppCompatActivity{
     private TextView creator;
     private TextView owner;
     private TextView mentor;
-    private TextView supervisor;
     private TextView status;
-    private String fireKey, creatorKey, ownerKey;
-    private String firebaseURL = "https://beartracks.firebaseio.com/roles/";
+    private ExpandableListView expandableListView;
+    private List<String> headers = new ArrayList<String>();
+    private HashMap<String, List<String>> listChildData = new HashMap<String, List<String>>();
+    private String fireKey;
+    private String firebaseURL = "https://beartracks.firebaseio.com/roles";
     android.support.v7.widget.Toolbar toolbar;
 
     @Override
@@ -40,8 +47,11 @@ public class Role_Details extends AppCompatActivity{
         creator = (TextView) findViewById(R.id.creator);
         owner = (TextView) findViewById(R.id.owner);
         mentor = (TextView) findViewById(R.id.mentor);
-        supervisor = (TextView) findViewById(R.id.supervisor);
         status = (TextView) findViewById(R.id.status);
+        expandableListView = (ExpandableListView) findViewById(R.id.expandableItems);
+
+        ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, headers,listChildData);
+        expandableListView.setAdapter(listAdapter);
 
         setupTexts();
     }
@@ -58,21 +68,25 @@ public class Role_Details extends AppCompatActivity{
                             name.setText(holder);
                             break;
                         case "creator":
-                            //creatorKey = holder;
                             setupCreator(holder);
                             break;
                         case "owner":
-                            //ownerKey = holder;
                             setupOwner(holder);
                             break;
                         case "mentor":
                             mentor.setText(holder);
                             break;
-                        case "supervisor":
-                            supervisor.setText(holder);
-                            break;
                         case "status":
                             status.setText(holder);
+                            break;
+                        case "accountabilities":
+                            setupAccountabilities(detail.getKey());
+                            break;
+                        case "attachments":
+                            setupAttachments(detail.getKey());
+                            break;
+                        case "authorities":
+                            setupAuthorities(detail.getKey());
                             break;
                     }
                 }
@@ -101,8 +115,6 @@ public class Role_Details extends AppCompatActivity{
             public void onCancelled(FirebaseError firebaseError) {
             }
         });
-
-
     }
 
     private void setupOwner(String key){
@@ -121,6 +133,71 @@ public class Role_Details extends AppCompatActivity{
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
+            }
+        });
+    }
+
+    private void setupAccountabilities(String key){
+        Firebase accountabilityRef = new Firebase(firebaseURL).child(fireKey).child(key);
+        headers.add("Accountabilities");
+
+        accountabilityRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> childNames = new ArrayList<String>();
+                for(DataSnapshot accountability: dataSnapshot.getChildren()){
+                    Accountability roleAccnt = accountability.getValue(Accountability.class);
+                    childNames.add(roleAccnt.getDescription());
+                }
+                listChildData.put("Accountabilities", childNames);
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+    }
+
+    private void setupAttachments(String key){
+        Firebase attachmentRef = new Firebase(firebaseURL).child(fireKey).child(key);
+        headers.add("Attachments");
+
+        attachmentRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> childNames = new ArrayList<String>();
+                for(DataSnapshot attachment : dataSnapshot.getChildren()){
+                    Attachment atchmnt = attachment.getValue(Attachment.class);
+                    childNames.add(atchmnt.getUrl());
+                }
+                listChildData.put("Attachments", childNames);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+    }
+
+    private void setupAuthorities(String key){
+        Firebase authorityRef = new Firebase(firebaseURL).child(fireKey).child(key);
+        headers.add("Authorities");
+
+        authorityRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<String> childNames = new ArrayList<String>();
+                for(DataSnapshot athrty : dataSnapshot.getChildren()){
+                    Authority cartman = athrty.getValue(Authority.class);
+                    childNames.add(cartman.getDescription());
+                }
+                listChildData.put("Authorities", childNames);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
             }
         });
 

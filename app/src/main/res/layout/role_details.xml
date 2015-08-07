@@ -117,36 +117,6 @@
         android:layout_marginLeft="16dp">
 
         <TextView
-            android:text="Supervisor:"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/supervisor"
-            android:text="supervisor"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_height="2dip"
-        android:layout_marginTop="5dp"
-        android:background="@color/divider"/>
-
-    <RelativeLayout
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp">
-
-        <TextView
             android:text="Status:"
             android:textStyle="bold"
             android:layout_width="wrap_content"
@@ -168,6 +138,14 @@
         android:layout_height="2dip"
         android:layout_marginTop="5dp"
         android:background="@color/divider"/>
+
+    <ExpandableListView
+        android:id="@+id/expandableItems"
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+    </ExpandableListView>
 
 
 </LinearLayout>
