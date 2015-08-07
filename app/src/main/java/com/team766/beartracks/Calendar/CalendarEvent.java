@@ -1,6 +1,7 @@
 package com.team766.beartracks.Calendar;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.team766.beartracks.Role.Attachment;
 import com.team766.beartracks.Roster.Person;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class CalendarEvent {
     private List<Person> people;
     private String title;
     private List<subEvent> subevents;
+    private List<Attachment> attachments;
     private String meals;
     private String supervision;
 
@@ -64,6 +66,10 @@ public class CalendarEvent {
 
     public String getSupervision(){
         return supervision;
+    }
+
+    public List<Attachment> getAttachments(){
+        return attachments;
     }
 
 }
