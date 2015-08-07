@@ -45,6 +45,7 @@ public class Role_Details extends AppCompatActivity{
 
         toolbar = (Toolbar) findViewById(R.id.role_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("Role Info");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
