@@ -1,9 +1,12 @@
 package com.team766.beartracks.Roster;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +16,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.team766.beartracks.MainActivity;
 import com.team766.beartracks.R;
 
 /**
@@ -26,15 +30,14 @@ public class Person_Details extends AppCompatActivity {
     TextView email;
     TextView phone;
     ImageView pic;
-    android.support.v7.widget.Toolbar toolbar;
-
+    private Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.person_details);
 
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.personDetails_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.personDetails_toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -52,6 +55,13 @@ public class Person_Details extends AppCompatActivity {
 
         setUserInfo();
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 
     private void setUserInfo(){
@@ -60,7 +70,7 @@ public class Person_Details extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot detail : dataSnapshot.getChildren()) {
-                    String holder = (String) detail.getValue();
+                    String holder = detail.getValue().toString();
                     switch (detail.getKey()) {
                         case "name":
                             name.setText(holder);

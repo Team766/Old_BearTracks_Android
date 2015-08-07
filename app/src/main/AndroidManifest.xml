@@ -35,6 +35,7 @@
 
         <activity android:name=".Roster.Person_Details"
             android:label="Person Details" />
+
         <activity android:name=".Role.Role_Details"
             android:label="Role Details"/>
 

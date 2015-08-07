@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -35,15 +36,18 @@ public class Role_Details extends AppCompatActivity{
     private HashMap<String, List<String>> listChildData = new HashMap<String, List<String>>();
     private String fireKey;
     private String firebaseURL = "https://beartracks.firebaseio.com/roles";
-    android.support.v7.widget.Toolbar toolbar;
+    Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.role_details);
 
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.role_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.role_toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         Bundle extras = getIntent().getExtras();
         fireKey = extras.getString("FirebaseKey");
@@ -63,7 +67,7 @@ public class Role_Details extends AppCompatActivity{
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                if(headers.get(groupPosition).equals("Attachments")){
+                if (headers.get(groupPosition).equals("Attachments")) {
                     String attachmentURL = attachments.get(childPosition).getUrl();
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
@@ -74,6 +78,14 @@ public class Role_Details extends AppCompatActivity{
                 return false;
             }
         });
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 
     private void makeToast(String name){

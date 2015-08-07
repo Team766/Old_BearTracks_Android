@@ -178,30 +178,35 @@ public class MainActivity extends AppCompatActivity {
                 mCurrentSelectedPosition = 0;
                 item.setChecked(true);
                 setTitle(item.getTitle());
+                mDrawerLayout.closeDrawers();
                 break;
             case R.id.cal_frag:
                 swapFragment(new Calendar_Fragment());
                 mCurrentSelectedPosition = 1;
                 item.setChecked(true);
                 setTitle(item.getTitle());
+                mDrawerLayout.closeDrawers();
                 break;
             case R.id.groups_frag:
                 swapFragment(new Groups_Fragment());
                 mCurrentSelectedPosition = 2;
                 item.setChecked(true);
                 setTitle(item.getTitle());
+                mDrawerLayout.closeDrawers();
                 break;
             case R.id.people_frag:
                 swapFragment(new People_Fragment());
                 mCurrentSelectedPosition = 3;
                 item.setChecked(true);
                 setTitle(item.getTitle());
+                mDrawerLayout.closeDrawers();
                 break;
             case R.id.role_frag:
                 swapFragment(new Role_Fragment());
                 mCurrentSelectedPosition = 4;
                 item.setChecked(true);
                 setTitle(item.getTitle());
+                mDrawerLayout.closeDrawers();
                 break;
             case R.id.settings:
                 startActivity(new Intent(this, SettingsActivity.class));
@@ -211,9 +216,8 @@ public class MainActivity extends AppCompatActivity {
             default:
                 swapFragment(new Home_Fragment());
                 mCurrentSelectedPosition = 0;
+                mDrawerLayout.closeDrawers();
         }
-
-        mDrawerLayout.closeDrawers();
     }
 
     public void onSaveInstanceState(Bundle outState) {
