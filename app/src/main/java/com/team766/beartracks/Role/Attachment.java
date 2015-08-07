@@ -3,20 +3,12 @@ package com.team766.beartracks.Role;
 /**
  * Created by tommypacker on 8/6/15.
  */
-public class Attachment {
-
-    private String name;
-    private String url;
+public class Attachment extends DescriptionObject{
 
     public Attachment(){
     }
 
-    public String getName(){
-        return name;
+    public void setURL(String url){
+        this.url = url;
     }
-
-    public String getUrl(){
-        return url;
-    }
-
 }

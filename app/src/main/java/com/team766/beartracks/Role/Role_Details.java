@@ -1,9 +1,13 @@
 package com.team766.beartracks.Role;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -27,6 +31,7 @@ public class Role_Details extends AppCompatActivity{
     private TextView status;
     private ExpandableListView expandableListView;
     private List<String> headers = new ArrayList<String>();
+    private List<Attachment> attachments = new ArrayList<Attachment>();
     private HashMap<String, List<String>> listChildData = new HashMap<String, List<String>>();
     private String fireKey;
     private String firebaseURL = "https://beartracks.firebaseio.com/roles";
@@ -54,6 +59,25 @@ public class Role_Details extends AppCompatActivity{
         expandableListView.setAdapter(listAdapter);
 
         setupTexts();
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                if(headers.get(groupPosition).equals("Attachments")){
+                    String attachmentURL = attachments.get(childPosition).getUrl();
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse(attachmentURL));
+                    startActivity(intent);
+                }
+                return false;
+            }
+        });
+    }
+
+    private void makeToast(String name){
+        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
     }
 
     private void setupTexts(){
@@ -168,7 +192,9 @@ public class Role_Details extends AppCompatActivity{
                 List<String> childNames = new ArrayList<String>();
                 for(DataSnapshot attachment : dataSnapshot.getChildren()){
                     Attachment atchmnt = attachment.getValue(Attachment.class);
-                    childNames.add(atchmnt.getUrl());
+                    atchmnt.setURL(atchmnt.getUrl());
+                    attachments.add(atchmnt);
+                    childNames.add(atchmnt.getName());
                 }
                 listChildData.put("Attachments", childNames);
             }
