@@ -82,7 +82,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         String childTitle = (String) this.getChild(groupPosition, childPosition);
 
         if(convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.role_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.role_item_child, parent, false);
         }
 
         TextView childTextView = (TextView) convertView.findViewById(R.id.role_name);

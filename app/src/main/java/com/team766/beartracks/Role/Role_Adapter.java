@@ -17,6 +17,10 @@ import java.util.ArrayList;
  */
 public class Role_Adapter extends ArrayAdapter<Role> {
 
+    private static class ViewHolder{
+        TextView name;
+    }
+
     public Role_Adapter(Context context, ArrayList<Role> roles) {
         super(context, 0, roles);
     }
@@ -25,13 +29,17 @@ public class Role_Adapter extends ArrayAdapter<Role> {
     public View getView(int position, View convertView, ViewGroup parent){
         Role role = getItem(position);
 
+        ViewHolder viewHolder;
         if (convertView == null) {
+            viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.role_item, parent, false);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.role_name);
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        TextView roleName  = (TextView) convertView.findViewById(R.id.role_name);
-
-        roleName.setText(role.getName());
+        viewHolder.name.setText(role.getName());
 
         return convertView;
 

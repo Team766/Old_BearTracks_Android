@@ -19,6 +19,12 @@ import java.util.ArrayList;
  */
 public class UserAdapter extends ArrayAdapter<Person> {
 
+    private static class ViewHolder{
+        TextView name;
+        ImageView pic;
+    }
+
+
     public UserAdapter(Context context, ArrayList<Person> users) {
         super(context, 0, users);
     }
@@ -27,16 +33,22 @@ public class UserAdapter extends ArrayAdapter<Person> {
     public View getView(int position, View convertView, ViewGroup parent){
         Person member = getItem(position);
 
+        ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.roster_item, parent, false);
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.roster_item, parent, false);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.name);
+            viewHolder.pic = (ImageView) convertView.findViewById(R.id.profilePicture);
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        ImageView profPic = (ImageView) convertView.findViewById(R.id.profilePicture);
+        viewHolder.name.setText(member.getName());
         String picURL = member.getPhoto();
-        Picasso.with(this.getContext()).load(picURL).resize(150,150).centerCrop().into(profPic);
-        
-        TextView memberName = (TextView) convertView.findViewById(R.id.name);
-        memberName.setText(member.getName());
+        Picasso.with(this.getContext()).load(picURL).resize(150,150).centerCrop().into(viewHolder.pic);
+
 
         return convertView;
     }
