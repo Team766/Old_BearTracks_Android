@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             mCurrentSelectedPosition =
                     savedInstanceState.getInt(STATE_SELECTED_POSITION);
+            onRestoreInstanceState(savedInstanceState);
         }
 
         settings = getSharedPreferences(welcome_screen.PREFS_NAME, MODE_PRIVATE);

@@ -46,6 +46,7 @@ public class People_Fragment extends Fragment {
                 b.putString("FirebaseKey", key);
                 Intent intent = new Intent(getActivity(), Person_Details.class);
                 intent.putExtras(b);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });

@@ -3,8 +3,10 @@ package com.team766.beartracks.Role;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -80,13 +82,6 @@ public class Role_Details extends AppCompatActivity{
             }
         });
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
     }
 
     private void makeToast(String name){
@@ -98,9 +93,9 @@ public class Role_Details extends AppCompatActivity{
         roleDetsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot detail : dataSnapshot.getChildren()){
+                for (DataSnapshot detail : dataSnapshot.getChildren()) {
                     String holder = detail.getValue().toString();
-                    switch (detail.getKey()){
+                    switch (detail.getKey()) {
                         case "name":
                             name.setText(holder);
                             break;
@@ -128,6 +123,7 @@ public class Role_Details extends AppCompatActivity{
                     }
                 }
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
 
@@ -239,7 +235,17 @@ public class Role_Details extends AppCompatActivity{
 
             }
         });
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = NavUtils.getParentActivityIntent(this);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                NavUtils.navigateUpTo(this, intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

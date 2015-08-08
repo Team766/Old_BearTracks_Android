@@ -54,14 +54,6 @@ public class Person_Details extends AppCompatActivity {
         fireKey = extras.getString("FirebaseKey");
 
         setUserInfo();
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
     }
 
     private void setUserInfo(){
@@ -100,5 +92,17 @@ public class Person_Details extends AppCompatActivity {
     private void makeToast(String name){
         Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = NavUtils.getParentActivityIntent(this);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                NavUtils.navigateUpTo(this, intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }
