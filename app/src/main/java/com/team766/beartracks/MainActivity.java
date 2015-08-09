@@ -212,6 +212,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SettingsActivity.class));
                 mCurrentSelectedPosition = 5;
                 break;
+            case R.id.logOut:
+                Intent intent = new Intent(this, welcome_screen.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                editor.putBoolean("hasLoggedIn", false);
+                editor.commit();
+                startActivity(intent);
+                finish();
+                break;
             //happy now Brett?
             default:
                 swapFragment(new Home_Fragment());
