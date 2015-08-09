@@ -221,7 +221,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
-            //happy now Brett?
             default:
                 swapFragment(new Home_Fragment());
                 mCurrentSelectedPosition = 0;
