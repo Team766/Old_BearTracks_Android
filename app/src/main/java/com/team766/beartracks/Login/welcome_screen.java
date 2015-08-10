@@ -33,7 +33,7 @@ public class welcome_screen extends AppCompatActivity {
 
         setContentView(R.layout.welcome_sreen);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.Toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Welcome");
     }

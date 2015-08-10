@@ -37,7 +37,7 @@ public class Person_Details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.person_details);
 
-        toolbar = (Toolbar) findViewById(R.id.personDetails_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

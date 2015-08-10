@@ -45,7 +45,7 @@ public class Role_Details extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.role_details);
 
-        toolbar = (Toolbar) findViewById(R.id.role_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Role Info");
 

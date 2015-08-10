@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupToolbar(){
-        toolbar = (Toolbar) findViewById(R.id.Toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         if(toolbar != null){
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

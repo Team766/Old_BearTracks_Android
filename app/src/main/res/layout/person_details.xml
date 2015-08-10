@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <include
-        layout="@layout/toolbar"
+        layout="@layout/toolbar_shadow"
         android:id="@+id/personDetails_toolbar"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
