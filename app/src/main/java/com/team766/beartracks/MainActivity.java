@@ -1,5 +1,7 @@
 package com.team766.beartracks;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
@@ -213,13 +215,7 @@ public class MainActivity extends AppCompatActivity {
                 mCurrentSelectedPosition = 5;
                 break;
             case R.id.logOut:
-                Intent intent = new Intent(this, welcome_screen.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                editor.putBoolean("hasLoggedIn", false);
-                editor.commit();
-                startActivity(intent);
-                finish();
+                confirmLogOut();
                 break;
             default:
                 swapFragment(new Home_Fragment());
@@ -263,6 +259,33 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         super.onBackPressed();
+    }
+
+    private void confirmLogOut(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Are you sure you want to log out?");
+
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getApplicationContext(), welcome_screen.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                editor.putBoolean("hasLoggedIn", false);
+                editor.commit();
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 }
