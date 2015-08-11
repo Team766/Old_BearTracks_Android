@@ -1,5 +1,8 @@
 package com.team766.beartracks.Calendar;
 
+import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
@@ -11,6 +14,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.DateTimeInterpreter;
@@ -20,9 +25,8 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-import com.team766.beartracks.MainActivity;
+import com.melnykov.fab.FloatingActionButton;
 import com.team766.beartracks.R;
-import com.team766.beartracks.Settings.SettingsActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,6 +41,7 @@ import java.util.Locale;
  */
 public class Calendar_Fragment extends Fragment implements WeekView.EventClickListener, WeekView.MonthChangeListener, WeekView.EventLongPressListener {
 
+    private FloatingActionButton fab;
     private WeekView mWeekView;
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
@@ -60,10 +65,22 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         mWeekView.setEventLongPressListener(this);
         mWeekView.setNumberOfVisibleDays(3);
         mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+
+        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.simple_grow);
+        fab.startAnimation(animation);
 
         if(savedInstanceState == null){
             setupCalendarEvents();
         }
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), NewEventActivity.class));
+            }
+        });
+
 
         return view;
     }
