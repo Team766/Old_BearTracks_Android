@@ -41,7 +41,7 @@ import java.util.Locale;
  */
 public class Calendar_Fragment extends Fragment implements WeekView.EventClickListener, WeekView.MonthChangeListener, WeekView.EventLongPressListener {
 
-    private FloatingActionButton fab;
+    //private FloatingActionButton fab;
     private WeekView mWeekView;
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
@@ -65,21 +65,23 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         mWeekView.setEventLongPressListener(this);
         mWeekView.setNumberOfVisibleDays(3);
         mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
-        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        //fab = (FloatingActionButton) view.findViewById(R.id.fab);
 
-        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.simple_grow);
-        fab.startAnimation(animation);
+        //Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.simple_grow);
+        //fab.startAnimation(animation);
 
         if(savedInstanceState == null){
             setupCalendarEvents();
         }
 
+        /*
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), NewEventActivity.class));
             }
         });
+        */
 
 
         return view;

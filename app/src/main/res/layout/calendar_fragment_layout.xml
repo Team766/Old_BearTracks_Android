@@ -24,6 +24,7 @@
         app:headerColumnBackground="#ffffffff"
         app:todayHeaderTextColor="#c13e3e"/>
 
+    <!--
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
         fab:fab_colorNormal="@color/primary"
@@ -35,7 +36,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add_white"
-        />
+        android:src="@drawable/ic_add_white"/>
+        -->
 
 </RelativeLayout>
