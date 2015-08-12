@@ -1,4 +1,4 @@
-# BearTracks Android App
+# BearTracks Android App [On pause until firebase is fully setup]
 
 The BearTracks Android app is the mobile companion to the BearTracks Web App that includes....
 
