@@ -108,7 +108,7 @@ public class Role_Details extends AppCompatActivity{
                             setupOwner(holder);
                             break;
                         case "mentor":
-                            mentor.setText(holder);
+                            setupMentor(holder);
                             break;
                         case "status":
                             status.setText(holder);
@@ -161,6 +161,26 @@ public class Role_Details extends AppCompatActivity{
                 for(DataSnapshot people: dataSnapshot.getChildren()){
                     if(people.getKey().equals("name")){
                         owner.setText(people.getValue().toString());
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+            }
+        });
+    }
+
+    private void setupMentor(String key){
+        Firebase ownerRef = new Firebase("https://beartracks.firebaseio.com/people").child(key);
+
+        ownerRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot people: dataSnapshot.getChildren()){
+                    if(people.getKey().equals("name")){
+                        mentor.setText(people.getValue().toString());
                         break;
                     }
                 }
