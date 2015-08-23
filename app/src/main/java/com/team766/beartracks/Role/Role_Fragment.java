@@ -66,7 +66,7 @@ public class Role_Fragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot roles: dataSnapshot.getChildren()){
-                    teamRole = roles.getValue(Role.class);
+                    teamRole = roles.getValue(Role.class); //Gets each "role" item
                     teamRole.setKey(roles.getKey());
                     roleList.add(teamRole);
                 }
@@ -75,11 +75,8 @@ public class Role_Fragment extends Fragment {
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
-
             }
         });
-
-
     }
 
 
