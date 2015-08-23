@@ -1,5 +1,6 @@
 package com.team766.beartracks.Roster;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public class Person {
     private int graduation;
     private String phone;
     private String photo;
-    private List<Person> associated;
+    private HashMap<String, Person> associated;
     private String key;
 
     @SuppressWarnings("unused")
@@ -45,7 +46,7 @@ public class Person {
         return photo;
     }
 
-    public List<Person> getAssociated(){
+    public HashMap<String,Person> getAssociated(){
         return associated;
     }
 

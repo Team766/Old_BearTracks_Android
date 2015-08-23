@@ -20,7 +20,7 @@ public class Role {
     private String results;
     private HashMap<String, Accountability> accountabilities;
     private HashMap<String, Authority> authorities;
-    private List<Attachment> attachments;
+    private HashMap<String, Attachment> attachments;
 
     public Role(){}
 
@@ -76,7 +76,7 @@ public class Role {
         return authorities;
     }
 
-    public List<Attachment> getAttachments(){
+    public HashMap<String, Attachment> getAttachments(){
         return attachments;
     }
 

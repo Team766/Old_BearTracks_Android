@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.team766.beartracks.Role.Attachment;
 import com.team766.beartracks.Roster.Person;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,10 +17,10 @@ public class CalendarEvent {
     private String end;
     private String start;
     private String location;
-    private List<Person> people;
+    private HashMap<String, Person> people;
     private String title;
-    private List<subEvent> subevents;
-    private List<Attachment> attachments;
+    private HashMap<String, subEvent> subevents;
+    private HashMap<String, Attachment> attachments;
     private String meals;
     private String supervision;
 
@@ -45,17 +46,14 @@ public class CalendarEvent {
         return title;
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public List<Person> getPeople(){
+    public HashMap<String, Person> getPeople(){
         return people;
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public List<subEvent> getSubevents(){
+    public HashMap<String, subEvent> getSubevents(){
         return subevents;
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
     public String getCreator(){
         return creator;
     }
@@ -68,7 +66,7 @@ public class CalendarEvent {
         return supervision;
     }
 
-    public List<Attachment> getAttachments(){
+    public HashMap<String, Attachment> getAttachments(){
         return attachments;
     }
 

@@ -2,6 +2,7 @@ package com.team766.beartracks.Calendar;
 
 import com.team766.beartracks.Roster.Person;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ public class subEvent {
 
     private String end;
     private String start;
-    private List<Person> people;
+    private HashMap<String, Person> people;
     private String title;
     private String type;
     private String description;
@@ -39,7 +40,7 @@ public class subEvent {
         return title;
     }
 
-    public List<Person> getPeople(){
+    public HashMap<String, Person> getPeople(){
         return people;
     }
 
