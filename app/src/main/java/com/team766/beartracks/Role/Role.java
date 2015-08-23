@@ -1,5 +1,6 @@
 package com.team766.beartracks.Role;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,8 +18,8 @@ public class Role {
     private String container;
     private String key;
     private String results;
-    private List<Accountability> accountabilities;
-    private List<Authority> authorities;
+    private HashMap<String, Accountability> accountabilities;
+    private HashMap<String, Authority> authorities;
     private List<Attachment> attachments;
 
     public Role(){}
@@ -67,11 +68,11 @@ public class Role {
         return key;
     }
 
-    public List<Accountability> getAccountabilities(){
+    public HashMap<String, Accountability> getAccountabilities(){
         return accountabilities;
     }
 
-    public List<Authority> getAuthorities(){
+    public HashMap<String, Authority> getAuthorities(){
         return authorities;
     }
 
