@@ -60,15 +60,16 @@ public class Role_Fragment extends Fragment {
 
     private void setupRoleList(){
         Firebase roleRef = new Firebase("https://beartracks.firebaseio.com/roles/");
-        Query queryRef = roleRef.orderByChild("container");
 
-        queryRef.addValueEventListener(new ValueEventListener() {
+        roleRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot roles: dataSnapshot.getChildren()){
+                for (DataSnapshot roles : dataSnapshot.getChildren()) {
                     teamRole = roles.getValue(Role.class); //Gets each "role" item
                     teamRole.setKey(roles.getKey());
-                    roleList.add(teamRole);
+                    if (teamRole.getContainer() == null) {
+                        roleList.add(teamRole);
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }

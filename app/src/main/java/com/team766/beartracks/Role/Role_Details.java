@@ -32,7 +32,6 @@ public class Role_Details extends AppCompatActivity{
     private TextView owner;
     private TextView mentor;
     private TextView status;
-    private ExpandableListView expandableListView;
     private List<String> headers = new ArrayList<String>();
     private List<Attachment> attachments = new ArrayList<Attachment>();
     private HashMap<String, List<String>> listChildData = new HashMap<String, List<String>>();
@@ -60,7 +59,7 @@ public class Role_Details extends AppCompatActivity{
         owner = (TextView) findViewById(R.id.owner);
         mentor = (TextView) findViewById(R.id.mentor);
         status = (TextView) findViewById(R.id.status);
-        expandableListView = (ExpandableListView) findViewById(R.id.expandableItems);
+        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandableItems);
 
         ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, headers,listChildData);
         expandableListView.setAdapter(listAdapter);

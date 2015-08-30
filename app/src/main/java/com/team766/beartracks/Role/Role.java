@@ -18,6 +18,7 @@ public class Role {
     private String container;
     private String key;
     private String results;
+    private String event;
     private HashMap<String, Accountability> accountabilities;
     private HashMap<String, Authority> authorities;
     private HashMap<String, Attachment> attachments;
@@ -58,6 +59,10 @@ public class Role {
 
     public String getResults(){
         return results;
+    }
+
+    public String getEvent(){
+        return event;
     }
 
     public void setKey(String key){

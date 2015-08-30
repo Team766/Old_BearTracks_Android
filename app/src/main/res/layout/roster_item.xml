@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--
     <ImageView
         android:id="@+id/profilePicture"
         android:layout_width="wrap_content"
@@ -13,12 +15,21 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="6dip"
         android:layout_marginEnd="6dip"
-        android:contentDescription="@string/ProfPicDescription"/>
+        android:contentDescription="@string/ProfPicDescription"/> -->
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/my_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="6dip"
+        android:layout_marginEnd="6dip" />
 
     <TextView
         android:id="@+id/name"
-        android:layout_toEndOf="@+id/profilePicture"
-        android:layout_toRightOf="@+id/profilePicture"
+        android:layout_toEndOf="@+id/my_image_view"
+        android:layout_toRightOf="@+id/my_image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
