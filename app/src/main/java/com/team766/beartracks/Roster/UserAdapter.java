@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.squareup.picasso.Picasso;
 import com.team766.beartracks.R;
@@ -26,8 +27,7 @@ public class UserAdapter extends ArrayAdapter<Person> {
 
     private static class ViewHolder{
         TextView name;
-        //ImageView pic;
-        SimpleDraweeView pic;
+        ImageView pic;
     }
 
 
@@ -45,8 +45,7 @@ public class UserAdapter extends ArrayAdapter<Person> {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.roster_item, parent, false);
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
-            //viewHolder.pic = (ImageView) convertView.findViewById(R.id.profilePicture);
-            viewHolder.pic = (SimpleDraweeView) convertView.findViewById(R.id.my_image_view);
+            viewHolder.pic = (ImageView) convertView.findViewById(R.id.profilePicture);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -54,16 +53,7 @@ public class UserAdapter extends ArrayAdapter<Person> {
 
         viewHolder.name.setText(member.getName());
         String picURL = member.getPhoto();
-        if (picURL == null){
-            Toast.makeText(getContext(), "Test", Toast.LENGTH_SHORT).show();
-        }else{
-            testUri = Uri.parse(picURL);
-        }
-
-        viewHolder.pic.setImageURI(testUri);
-
-
-
+        Picasso.with(this.getContext()).load(picURL).resize(150,150).centerCrop().into(viewHolder.pic);
 
         return convertView;
     }

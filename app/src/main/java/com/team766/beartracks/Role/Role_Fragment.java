@@ -67,9 +67,7 @@ public class Role_Fragment extends Fragment {
                 for (DataSnapshot roles : dataSnapshot.getChildren()) {
                     teamRole = roles.getValue(Role.class); //Gets each "role" item
                     teamRole.setKey(roles.getKey());
-                    if (teamRole.getContainer() == null) {
-                        roleList.add(teamRole);
-                    }
+                    roleList.add(teamRole);
                 }
                 adapter.notifyDataSetChanged();
             }

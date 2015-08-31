@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.team766.beartracks"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
     }
@@ -32,5 +32,6 @@ dependencies {
     compile 'com.github.alamkanak:android-week-view:1.2.3'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.melnykov:floatingactionbutton:1.3.0'
-    compile 'com.facebook.fresco:fresco:0.6.1+'
+    compile 'com.facebook.fresco:fresco:0.7.0'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
 }
