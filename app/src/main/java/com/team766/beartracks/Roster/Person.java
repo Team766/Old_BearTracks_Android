@@ -15,7 +15,7 @@ public class Person {
     private int graduation;
     private String phone;
     private String photo;
-    private HashMap<String, Person> associated;
+    private HashMap<String, String> associated;
     private String key;
 
     @SuppressWarnings("unused")
@@ -46,7 +46,7 @@ public class Person {
         return photo;
     }
 
-    public HashMap<String,Person> getAssociated(){
+    public HashMap<String,String> getAssociated(){
         return associated;
     }
 
