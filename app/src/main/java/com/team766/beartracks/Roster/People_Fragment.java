@@ -59,7 +59,7 @@ public class People_Fragment extends Fragment {
     private void setupRoster(){
         Firebase peopleRef = new Firebase(firebaseURL).child("people");
 
-        peopleRef.addValueEventListener(new ValueEventListener() {
+        peopleRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot people : dataSnapshot.getChildren()) {

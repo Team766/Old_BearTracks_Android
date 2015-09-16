@@ -60,8 +60,9 @@ public class Role_Fragment extends Fragment {
 
     private void setupRoleList(){
         Firebase roleRef = new Firebase("https://beartracks.firebaseio.com/roles/");
+        Query containerSort = roleRef.orderByChild("container");
 
-        roleRef.addValueEventListener(new ValueEventListener() {
+        containerSort.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot roles : dataSnapshot.getChildren()) {

@@ -35,6 +35,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by tommypacker on 7/28/15.
@@ -65,30 +66,16 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         mWeekView.setEventLongPressListener(this);
         mWeekView.setNumberOfVisibleDays(3);
         mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
-        //fab = (FloatingActionButton) view.findViewById(R.id.fab);
-
-        //Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.simple_grow);
-        //fab.startAnimation(animation);
 
         if(savedInstanceState == null){
             setupCalendarEvents();
         }
 
-        /*
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), NewEventActivity.class));
-            }
-        });
-        */
-
-
         return view;
     }
 
     private void setupCalendarEvents(){
-        calRef.addValueEventListener(new ValueEventListener() {
+        calRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot events : dataSnapshot.getChildren()) {
@@ -205,7 +192,7 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
     private WeekViewEvent getEvent(String start, String end, String title, String description, String meals, String supervision){
         Calendar startTime = Calendar.getInstance();
         Calendar endTime = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+HH:mm", Locale.getDefault());
         try {
             startTime.setTime(sdf.parse(start));
             endTime.setTime(sdf.parse(end));
