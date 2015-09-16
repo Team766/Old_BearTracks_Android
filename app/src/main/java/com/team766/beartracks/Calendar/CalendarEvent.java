@@ -14,8 +14,8 @@ public class CalendarEvent {
 
     private String description;
     private String creator;
-    private String end;
-    private String start;
+    private long end;
+    private long start;
     private String location;
     private HashMap<String, Person> people;
     private String title;
@@ -30,11 +30,11 @@ public class CalendarEvent {
         return description;
     }
 
-    public String getEnd(){
+    public long getEnd(){
         return end;
     }
 
-    public String getStart(){
+    public long getStart(){
         return start;
     }
 

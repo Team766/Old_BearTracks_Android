@@ -189,19 +189,15 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         return events;
     }
 
-    private WeekViewEvent getEvent(String start, String end, String title, String description, String meals, String supervision){
+    private WeekViewEvent getEvent(long start, long end, String title, String description, String meals, String supervision){
         Calendar startTime = Calendar.getInstance();
         Calendar endTime = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+HH:mm", Locale.getDefault());
-        try {
-            startTime.setTime(sdf.parse(start));
-            endTime.setTime(sdf.parse(end));
-        } catch (ParseException e){
-            //Nothing
-        }
+        startTime.setTimeInMillis(start);
+        endTime.setTimeInMillis(end);
 
         WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime, title, description, meals, supervision), startTime, endTime);
         event.setColor(getResources().getColor(R.color.primary));
+        mWeekView.notifyDatasetChanged();
         return event;
     }
 
