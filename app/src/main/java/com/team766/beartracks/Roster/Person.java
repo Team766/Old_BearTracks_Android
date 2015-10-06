@@ -17,6 +17,7 @@ public class Person {
     private String photo;
     private HashMap<String, String> associated;
     private String key;
+    private int notificationPeriod;
 
     @SuppressWarnings("unused")
     public Person(){
@@ -64,5 +65,9 @@ public class Person {
 
     public String getKey(){
         return key;
+    }
+
+    public int getNotificationPeriod(){
+        return notificationPeriod;
     }
 }
