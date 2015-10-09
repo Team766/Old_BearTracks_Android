@@ -34,6 +34,7 @@ public class Role_Details extends AppCompatActivity{
     private TextView status;
     private List<String> headers = new ArrayList<String>();
     private List<Attachment> attachments = new ArrayList<Attachment>();
+    private ExpandableListAdapter listAdapter;
     private HashMap<String, List<String>> listChildData = new HashMap<String, List<String>>();
     private String fireKey;
     private String firebaseURL = "https://beartracks.firebaseio.com/roles";
@@ -61,7 +62,7 @@ public class Role_Details extends AppCompatActivity{
         status = (TextView) findViewById(R.id.status);
         ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandableItems);
 
-        ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, headers,listChildData);
+        listAdapter = new ExpandableListAdapter(this, headers,listChildData);
         expandableListView.setAdapter(listAdapter);
 
         setupTexts();
@@ -164,7 +165,6 @@ public class Role_Details extends AppCompatActivity{
                     }
                 }
             }
-
             @Override
             public void onCancelled(FirebaseError firebaseError) {
             }
@@ -204,6 +204,7 @@ public class Role_Details extends AppCompatActivity{
                     childNames.add(roleAccnt.getDescription());
                 }
                 listChildData.put("Accountabilities", childNames);
+                listAdapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(FirebaseError firebaseError) {
@@ -227,11 +228,11 @@ public class Role_Details extends AppCompatActivity{
                     childNames.add(atchmnt.getName());
                 }
                 listChildData.put("Attachments", childNames);
+                listAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
-
             }
         });
     }
@@ -253,7 +254,6 @@ public class Role_Details extends AppCompatActivity{
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
-
             }
         });
     }
