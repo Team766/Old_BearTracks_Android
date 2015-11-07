@@ -80,7 +80,7 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot events : dataSnapshot.getChildren()) {
                     calEvent = events.getValue(CalendarEvent.class);
-                    preEvents.add(getEvent(calEvent.getStart(), calEvent.getEnd(), calEvent.getTitle(), calEvent.getDescription(), calEvent.getMeals(), calEvent.getSupervision()));
+                    preEvents.add(getEvent(calEvent.getStart(), calEvent.getEnd(), calEvent.getTitle()));
                 }
                 mWeekView.notifyDatasetChanged();
             }
@@ -189,20 +189,20 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         return events;
     }
 
-    private WeekViewEvent getEvent(long start, long end, String title, String description, String meals, String supervision){
+    private WeekViewEvent getEvent(long start, long end, String title){
         Calendar startTime = Calendar.getInstance();
         Calendar endTime = Calendar.getInstance();
         startTime.setTimeInMillis(start);
         endTime.setTimeInMillis(end);
 
-        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime, title, description, meals, supervision), startTime, endTime);
+        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime, title), startTime, endTime);
         event.setColor(getResources().getColor(R.color.primary));
         mWeekView.notifyDatasetChanged();
         return event;
     }
 
-    private String getEventTitle(Calendar time, String title, String description, String meals, String supervision) {
-        return String.format(title + " at %02d:%02d" + "\n\n" + description + "\n\n" + meals + "\n\n" + supervision, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
+    private String getEventTitle(Calendar time, String title) {
+        return String.format(title + " at %02d:%02d" + "\n\n", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
     }
 
     @Override
