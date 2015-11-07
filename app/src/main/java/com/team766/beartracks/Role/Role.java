@@ -1,5 +1,7 @@
 package com.team766.beartracks.Role;
 
+import com.team766.beartracks.Roster.Person;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class Role {
     private HashMap<String, Accountability> accountabilities;
     private HashMap<String, Authority> authorities;
     private HashMap<String, Attachment> attachments;
+    private HashMap<String, Boolean> informs;
 
     public Role(){}
 
@@ -85,7 +88,9 @@ public class Role {
         return attachments;
     }
 
-
+    public HashMap<String, Boolean> getInforms(){
+        return informs;
+    }
 
 
 }

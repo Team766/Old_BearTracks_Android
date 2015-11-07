@@ -21,7 +21,7 @@ import java.util.ArrayList;
 /**
  * Created by tommypacker on 8/5/15.
  */
-public class UserAdapter extends ArrayAdapter<Person> {
+public class Person_Adapter extends ArrayAdapter<Person> {
 
     private Uri testUri;
 
@@ -31,7 +31,7 @@ public class UserAdapter extends ArrayAdapter<Person> {
     }
 
 
-    public UserAdapter(Context context, ArrayList<Person> users) {
+    public Person_Adapter(Context context, ArrayList<Person> users) {
         super(context, 0, users);
     }
 
@@ -53,7 +53,7 @@ public class UserAdapter extends ArrayAdapter<Person> {
 
         viewHolder.name.setText(member.getName());
         String picURL = member.getPhoto();
-        Picasso.with(this.getContext()).load(picURL).resize(150,150).centerCrop().into(viewHolder.pic);
+        Picasso.with(this.getContext()).load(picURL).resize(175,175).centerCrop().into(viewHolder.pic);
 
         return convertView;
     }

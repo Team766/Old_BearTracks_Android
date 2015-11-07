@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -26,14 +25,14 @@ public class People_Fragment extends Fragment {
 
     private ArrayList<Person> roster = new ArrayList<Person>();
     private Person teamMember;
-    UserAdapter adapter;
+    Person_Adapter adapter;
     private String firebaseURL = "https://beartracks.firebaseio.com";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.roster, container, false);
 
-        adapter = new UserAdapter(getActivity(), roster);
+        adapter = new Person_Adapter(getActivity(), roster);
         ListView listView = (ListView) view.findViewById(R.id.list);
         listView.setAdapter(adapter);
         setupRoster();

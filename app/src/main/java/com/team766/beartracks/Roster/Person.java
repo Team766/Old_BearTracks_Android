@@ -12,7 +12,7 @@ public class Person {
     private String status;
     private String id;
     private int supervisor;
-    private int graduation;
+    private String graduation;
     private String phone;
     private String photo;
     private HashMap<String, String> associated;
@@ -55,7 +55,7 @@ public class Person {
         return supervisor;
     }
 
-    public int getGraduation(){
+    public String getGraduation(){
         return graduation;
     }
 
