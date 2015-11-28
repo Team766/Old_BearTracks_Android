@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -62,15 +63,25 @@ public class Role_Fragment extends Fragment {
         Firebase roleRef = new Firebase("https://beartracks.firebaseio.com/roles/");
         Query containerSort = roleRef.orderByChild("container");
 
-        containerSort.addListenerForSingleValueEvent(new ValueEventListener() {
+        containerSort.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot roles : dataSnapshot.getChildren()) {
-                    teamRole = roles.getValue(Role.class); //Gets each "role" item
-                    teamRole.setKey(roles.getKey());
-                    roleList.add(teamRole);
-                }
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                teamRole = dataSnapshot.getValue(Role.class);
+                teamRole.setKey(dataSnapshot.getKey());
+                roleList.add(teamRole);
                 adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             }
 
             @Override

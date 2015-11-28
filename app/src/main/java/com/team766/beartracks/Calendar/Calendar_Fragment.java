@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.alamkanak.weekview.DateTimeInterpreter;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -75,14 +76,24 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
     }
 
     private void setupCalendarEvents(){
-        calRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        calRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot events : dataSnapshot.getChildren()) {
-                    calEvent = events.getValue(CalendarEvent.class);
-                    preEvents.add(getEvent(calEvent.getStart(), calEvent.getEnd(), calEvent.getTitle()));
-                }
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                calEvent = dataSnapshot.getValue(CalendarEvent.class);
+                preEvents.add(getEvent(calEvent.getStart(), calEvent.getEnd(), calEvent.getTitle()));
                 mWeekView.notifyDatasetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             }
 
             @Override

@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -58,16 +59,25 @@ public class People_Fragment extends Fragment {
     private void setupRoster(){
         Firebase peopleRef = new Firebase(firebaseURL).child("people");
 
-        peopleRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        peopleRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot people : dataSnapshot.getChildren()) {
-                    teamMember = people.getValue(Person.class);
-                    teamMember.setKey(people.getKey());
-                    roster.add(teamMember);
-                    //makeToast(people.getKey());
-                }
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                teamMember = dataSnapshot.getValue(Person.class);
+                teamMember.setKey(dataSnapshot.getKey());
+                roster.add(teamMember);
                 adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             }
 
             @Override
