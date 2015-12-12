@@ -34,7 +34,7 @@ public class Role_Details extends AppCompatActivity{
     private TextView status;
     private List<String> headers = new ArrayList<String>();
     private List<Attachment> attachments = new ArrayList<Attachment>();
-    private ExpandableListAdapter listAdapter;
+    private Role_ExpandableList_Adapter listAdapter;
     private HashMap<String, List<String>> listChildData = new HashMap<String, List<String>>();
     private String fireKey;
     private String firebaseURL = "https://beartracks.firebaseio.com/roles";
@@ -62,7 +62,7 @@ public class Role_Details extends AppCompatActivity{
         status = (TextView) findViewById(R.id.status);
         ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandableItems);
 
-        listAdapter = new ExpandableListAdapter(this, headers,listChildData);
+        listAdapter = new Role_ExpandableList_Adapter(this, headers,listChildData);
         expandableListView.setAdapter(listAdapter);
 
         setupTexts();

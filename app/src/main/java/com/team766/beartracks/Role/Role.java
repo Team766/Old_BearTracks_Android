@@ -1,9 +1,6 @@
 package com.team766.beartracks.Role;
 
-import com.team766.beartracks.Roster.Person;
-
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by tommypacker on 8/6/15.

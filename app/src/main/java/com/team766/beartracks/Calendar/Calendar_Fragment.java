@@ -1,9 +1,5 @@
 package com.team766.beartracks.Calendar;
 
-import android.app.DialogFragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,8 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.DateTimeInterpreter;
@@ -25,18 +19,14 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
-import com.melnykov.fab.FloatingActionButton;
 import com.team766.beartracks.R;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * Created by tommypacker on 7/28/15.
@@ -50,7 +40,7 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
     private static final int TYPE_WEEK_VIEW = 3;
     private int mWeekViewType = TYPE_THREE_DAY_VIEW;
     private List<WeekViewEvent> preEvents = new ArrayList<WeekViewEvent>();
-    private CalendarEvent calEvent;
+    private Calendar_Event calEvent;
     private Firebase calRef;
 
     @Override
@@ -79,7 +69,7 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         calRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                calEvent = dataSnapshot.getValue(CalendarEvent.class);
+                calEvent = dataSnapshot.getValue(Calendar_Event.class);
                 preEvents.add(getEvent(calEvent.getStart(), calEvent.getEnd(), calEvent.getTitle()));
                 mWeekView.notifyDatasetChanged();
             }

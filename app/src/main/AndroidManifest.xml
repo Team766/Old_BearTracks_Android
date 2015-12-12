@@ -16,7 +16,7 @@
             android:launchMode="singleTop">
         </activity>
 
-        <activity android:name=".Login.welcome_screen"
+        <activity android:name=".Login.Welcome_Activity"
             android:label="Bear Tracks">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,25 +25,21 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Login.login_activity"
+        <activity android:name=".Login.Login_Activity"
             android:label="Login"
-            android:parentActivityName=".Login.welcome_screen">
+            android:parentActivityName=".Login.Welcome_Activity">
         </activity>
 
         <activity android:name=".Settings.SettingsActivity"
             android:label="Settings"
             android:parentActivityName=".MainActivity"/>
 
-        <activity android:name=".Roster.Person_Details"
+        <activity android:name=".Roster.Member_Info"
             android:label="Person Details"
             android:parentActivityName=".MainActivity"/>
 
         <activity android:name=".Role.Role_Details"
             android:label="Role Details"
-            android:parentActivityName=".MainActivity"/>
-
-        <activity android:name=".Calendar.NewEventActivity"
-            android:label="New Event"
             android:parentActivityName=".MainActivity"/>
 
     </application>

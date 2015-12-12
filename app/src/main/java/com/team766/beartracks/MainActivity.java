@@ -26,14 +26,14 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.squareup.picasso.Picasso;
-import com.team766.beartracks.Login.welcome_screen;
-import com.team766.beartracks.Roster.Person;
+import com.team766.beartracks.Login.Welcome_Activity;
+import com.team766.beartracks.Roster.Member;
 import com.team766.beartracks.Settings.SettingsActivity;
 import com.team766.beartracks.Calendar.Calendar_Fragment;
 import com.team766.beartracks.UI.Groups_Fragment;
 import com.team766.beartracks.UI.Home_Fragment;
-import com.team766.beartracks.Roster.People_Fragment;
-import com.team766.beartracks.Role.Role_Fragment;
+import com.team766.beartracks.Roster.Roster_List;
+import com.team766.beartracks.Role.Role_List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
     private Firebase peopleRef;
-    private Person User;
+    private Member User;
     private CircleImageView profPic;
 
     @Override
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     savedInstanceState.getInt(STATE_SELECTED_POSITION);
         }
 
-        settings = getSharedPreferences(welcome_screen.PREFS_NAME, MODE_PRIVATE);
+        settings = getSharedPreferences(Welcome_Activity.PREFS_NAME, MODE_PRIVATE);
         editor = settings.edit();
         userEmail = settings.getString("userEmail", "");
         String personName = settings.getString("userName", "");
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    User = child.getValue(Person.class);
+                    User = child.getValue(Member.class);
                     emailChecker = User.getEmail();
                     if (emailChecker.equals(userEmail)) {
                         profileName.setText(User.getName());
@@ -132,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 makeToast("You got yourself an error, try restarting the app");
@@ -199,14 +198,14 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.people_frag:
-                swapFragment(new People_Fragment());
+                swapFragment(new Roster_List());
                 mCurrentSelectedPosition = 3;
                 item.setChecked(true);
                 setTitle(item.getTitle());
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.role_frag:
-                swapFragment(new Role_Fragment());
+                swapFragment(new Role_List());
                 mCurrentSelectedPosition = 4;
                 item.setChecked(true);
                 setTitle(item.getTitle());
@@ -270,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
         alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(), welcome_screen.class);
+                Intent intent = new Intent(getApplicationContext(), Welcome_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 editor.putBoolean("hasLoggedIn", false);

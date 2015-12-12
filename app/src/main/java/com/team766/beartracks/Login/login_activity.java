@@ -20,7 +20,7 @@ import com.team766.beartracks.R;
 /**
  * Created by tommypacker on 7/29/15.
  */
-public class login_activity extends AppCompatActivity {
+public class Login_Activity extends AppCompatActivity {
 
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
@@ -32,7 +32,7 @@ public class login_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ref = new Firebase("https://beartracks.firebaseio.com/people");
 
-        settings = getSharedPreferences(welcome_screen.PREFS_NAME, MODE_PRIVATE);
+        settings = getSharedPreferences(Welcome_Activity.PREFS_NAME, MODE_PRIVATE);
         editor = settings.edit();
 
         setContentView(R.layout.login_layout);
