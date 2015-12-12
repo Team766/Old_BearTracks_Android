@@ -43,6 +43,7 @@ public class Role_Details extends AppCompatActivity{
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        Firebase.setAndroidContext(this);
         setContentView(R.layout.role_details);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);

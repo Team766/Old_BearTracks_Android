@@ -44,11 +44,10 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private NavigationView nvDrawer;
     private Toolbar toolbar;
-    private String userEmail, emailChecker, picURL;
+    private String userEmail, emailChecker;
     private TextView profileName;
     static final String STATE_SELECTED_POSITION = "orientation";
     private int mCurrentSelectedPosition = 0;
-    private SharedPreferences settings;
     private SharedPreferences.Editor editor;
     private Firebase peopleRef;
     private Member User;
@@ -57,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Firebase.setAndroidContext(this);
         Fresco.initialize(this);
         setContentView(R.layout.activity_main);
 
@@ -67,11 +67,11 @@ public class MainActivity extends AppCompatActivity {
                     savedInstanceState.getInt(STATE_SELECTED_POSITION);
         }
 
-        settings = getSharedPreferences(Welcome_Screen.PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences(Welcome_Screen.PREFS_NAME, MODE_PRIVATE);
         editor = settings.edit();
         userEmail = settings.getString("userEmail", "");
         String personName = settings.getString("userName", "");
-        picURL = settings.getString("picURL", "");
+        String picURL = settings.getString("picURL", "");
 
         setupToolbar();
         setupNavDrawer();
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else if(picURL.equals("")){
             editor.putString("picURL", "https://pbs.twimg.com/profile_images/1307271994/image.jpg");
-            editor.commit();
+            editor.apply();
         }
         else{
             profileName.setText(personName);
@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
     private void setupNavDrawer(){
         if(toolbar != null){
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            // Find and setup drawerview
             nvDrawer = (NavigationView) findViewById(R.id.nvView);
             setupDrawerContent(nvDrawer);
 
@@ -272,8 +271,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Welcome_Screen.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                editor.putBoolean("hasLoggedIn", false);
-                editor.commit();
+                editor.putBoolean("hasLoggedIn", false).commit();
                 startActivity(intent);
                 finish();
             }

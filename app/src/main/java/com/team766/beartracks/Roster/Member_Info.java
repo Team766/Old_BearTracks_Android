@@ -35,6 +35,7 @@ public class Member_Info extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        Firebase.setAndroidContext(this);
         setContentView(R.layout.person_details);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
