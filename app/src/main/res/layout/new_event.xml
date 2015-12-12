@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <include
-        layout="@layout/toolbar_shadow"
+        layout="@layout/toolbar"
         android:id="@+id/newEventToolbar"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>

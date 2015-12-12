@@ -17,10 +17,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private FragmentManager fragmentManager;
     private NavigationView nvDrawer;
+    private View headerView;
     private Toolbar toolbar;
     private String userEmail, emailChecker;
     private TextView profileName;
@@ -57,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-        Fresco.initialize(this);
         setContentView(R.layout.activity_main);
 
         peopleRef = new Firebase("https://beartracks.firebaseio.com/people/");
@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
         setupToolbar();
         setupNavDrawer();
-        profileName = (TextView) findViewById(R.id.userEmailDisplay);
-        profPic = (CircleImageView) findViewById(R.id.circleView);
+        profileName = (TextView) headerView.findViewById(R.id.userEmailDisplay);
+        profPic = (CircleImageView) headerView.findViewById(R.id.circleView);
 
         if(personName.equals("")){
             setProfileName();
@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         if(toolbar != null){
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
             nvDrawer = (NavigationView) findViewById(R.id.nvView);
+            headerView = nvDrawer.inflateHeaderView(R.layout.header);
             setupDrawerContent(nvDrawer);
 
             mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
