@@ -26,7 +26,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.squareup.picasso.Picasso;
-import com.team766.beartracks.Login.Welcome_Activity;
+import com.team766.beartracks.Login.Welcome_Screen;
 import com.team766.beartracks.Roster.Member;
 import com.team766.beartracks.Settings.SettingsActivity;
 import com.team766.beartracks.Calendar.Calendar_Fragment;
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     savedInstanceState.getInt(STATE_SELECTED_POSITION);
         }
 
-        settings = getSharedPreferences(Welcome_Activity.PREFS_NAME, MODE_PRIVATE);
+        settings = getSharedPreferences(Welcome_Screen.PREFS_NAME, MODE_PRIVATE);
         editor = settings.edit();
         userEmail = settings.getString("userEmail", "");
         String personName = settings.getString("userName", "");
@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
         alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getApplicationContext(), Welcome_Activity.class);
+                Intent intent = new Intent(getApplicationContext(), Welcome_Screen.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 editor.putBoolean("hasLoggedIn", false);

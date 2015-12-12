@@ -15,7 +15,7 @@ import com.team766.beartracks.R;
 /**
  * Created by tommypacker on 7/29/15.
  */
-public class Welcome_Activity extends AppCompatActivity {
+public class Welcome_Screen extends AppCompatActivity {
 
     public static final String PREFS_NAME = "MyPrefsFile";
 
@@ -38,7 +38,7 @@ public class Welcome_Activity extends AppCompatActivity {
     }
 
     public void existingLogin(View view){
-        Intent intent = new Intent(getApplicationContext(), Login_Activity.class);
+        Intent intent = new Intent(getApplicationContext(), Login_Screen.class);
         startActivity(intent);
     }
 

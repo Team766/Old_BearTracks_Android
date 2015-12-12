@@ -16,7 +16,7 @@
             android:launchMode="singleTop">
         </activity>
 
-        <activity android:name=".Login.Welcome_Activity"
+        <activity android:name=".Login.Welcome_Screen"
             android:label="Bear Tracks">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,9 +25,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Login.Login_Activity"
+        <activity android:name=".Login.Login_Screen"
             android:label="Login"
-            android:parentActivityName=".Login.Welcome_Activity">
+            android:parentActivityName=".Login.Welcome_Screen">
         </activity>
 
         <activity android:name=".Settings.SettingsActivity"
