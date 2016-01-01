@@ -30,7 +30,7 @@ public class Roster_List extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.roster, container, false);
+        View view = inflater.inflate(R.layout.roster_fragment, container, false);
 
         adapter = new Member_Adapter(getActivity(), roster);
         ListView listView = (ListView) view.findViewById(R.id.list);

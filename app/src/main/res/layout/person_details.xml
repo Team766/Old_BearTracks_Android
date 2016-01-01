@@ -18,9 +18,9 @@
 
         <ImageView
             android:id="@+id/userPicture"
-            android:layout_width="110dp"
-            android:layout_marginTop="15dp"
-            android:layout_height="110dp"
+            android:layout_width="175dp"
+            android:layout_marginTop="25dp"
+            android:layout_height="175dp"
             android:contentDescription="@string/ProfPicDescription"
             android:layout_gravity="center_horizontal" />
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Name"
-            android:textSize="25sp"
+            android:textSize="28sp"
             android:textStyle="bold"
             android:layout_marginTop="15dp" />
 
@@ -62,7 +62,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="None Given"
+                android:autoLink="email"
                 android:textSize="15sp"
                 android:layout_marginTop="20dp"/>
 
@@ -97,7 +98,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Phone Number"
+                android:text="None Given"
                 android:autoLink="phone"
                 android:textSize="15sp"
                 android:layout_marginTop="20dp"/>

@@ -190,13 +190,6 @@ public class MainActivity extends AppCompatActivity {
                 setTitle(item.getTitle());
                 mDrawerLayout.closeDrawers();
                 break;
-            case R.id.groups_frag:
-                swapFragment(new Groups_Fragment());
-                mCurrentSelectedPosition = 2;
-                item.setChecked(true);
-                setTitle(item.getTitle());
-                mDrawerLayout.closeDrawers();
-                break;
             case R.id.people_frag:
                 swapFragment(new Roster_List());
                 mCurrentSelectedPosition = 3;

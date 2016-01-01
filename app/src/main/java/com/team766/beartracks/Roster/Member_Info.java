@@ -82,7 +82,6 @@ public class Member_Info extends AppCompatActivity {
 
                 }
             }
-
             @Override
             public void onCancelled(FirebaseError firebaseError) {
 
