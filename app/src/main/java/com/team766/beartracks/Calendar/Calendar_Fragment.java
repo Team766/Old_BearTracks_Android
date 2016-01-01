@@ -59,9 +59,7 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         mWeekView.setNumberOfVisibleDays(3);
         mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
 
-        if(savedInstanceState == null){
-            setupCalendarEvents();
-        }
+        setupCalendarEvents();
 
         return view;
     }
@@ -72,6 +70,7 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 calEvent = dataSnapshot.getValue(Calendar_Event.class);
                 preEvents.add(getEvent(calEvent.getStart(), calEvent.getEnd(), calEvent.getTitle()));
+                System.out.println(calEvent.getTitle());
                 mWeekView.notifyDatasetChanged();
             }
 
@@ -183,8 +182,8 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         cal.setTime(date);
         int month = cal.get(Calendar.MONTH);
 
-        if(newMonth == month){
-            for(int i = 0; i<preEvents.size(); i++){
+        for(int i = 0; i<preEvents.size(); i++){
+            if(preEvents.get(i).getStartTime().get(Calendar.MONTH) == newMonth){
                 events.add(preEvents.get(i));
             }
         }
