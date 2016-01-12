@@ -28,6 +28,15 @@ BearTracks Mobile utilizes:
 
 -[Picasso](http://square.github.io/picasso/)
 
+### To-Do By June 2016
+
+-Implement Google-Oauth for Users
+
+-Switch to Google Calendar
+
+-Use Material Cardview (Recyclerview) for member info to enhance UI
+
+-Reformat "roles" JSON to better represent real life implementation
 
 ### Dev 
 
