@@ -38,6 +38,8 @@ BearTracks Mobile utilizes:
 
 -Reformat "roles" JSON to better represent real life implementation
 
+-Add ability to add roles and calendar events based on user's permissions
+
 ### Dev 
 
 Made by [Tommy Yu](https://github.com/tommypacker) for [Team766](https://github.com/Team766) during the Summer of 2015.
