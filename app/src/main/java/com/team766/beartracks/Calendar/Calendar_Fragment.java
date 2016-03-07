@@ -206,21 +206,24 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
     }
 
     private String getEventTitle(Calendar time, String title) {
-        return String.format(title + " at %02d:%02d" + "\n\n", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
+        return String.format(title + " at %02d:%02d" + "\n\n", time.get(Calendar.HOUR) , time.get(Calendar.MINUTE));
     }
 
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF rectF) {
         Calendar_Event eventToView = calEvents.get((int)event.getId());
-        Toast.makeText(getContext(), eventToView.getId(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), eventToView.getId(), Toast.LENGTH_SHORT).show();
         Bundle eventDetails = new Bundle();
         eventDetails.putString("eventId", eventToView.getId());
+        Intent intent = new Intent(getContext(), Calendar_Detail_Activity.class);
+        intent.putExtras(eventDetails);
+        startActivity(intent);
     }
 
     @Override
     public void onEventLongPress(WeekViewEvent event, RectF rectF) {
-        Toast.makeText(this.getActivity(),event.getName(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this.getActivity(),event.getName(), Toast.LENGTH_LONG).show();
     }
 
 
