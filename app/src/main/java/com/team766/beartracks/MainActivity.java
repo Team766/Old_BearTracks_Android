@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -34,6 +35,8 @@ import com.team766.beartracks.UI.Groups_Fragment;
 import com.team766.beartracks.UI.Home_Fragment;
 import com.team766.beartracks.Roster.Roster_List;
 import com.team766.beartracks.Role.Role_List;
+
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private Firebase peopleRef;
     private Member User;
     private CircleImageView profPic;
+    public static HashMap<String, Member> teamMembers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         String picURL = settings.getString("picURL", "");
 
         setupToolbar();
+        teamMembers = new HashMap<>();
+        storeRoster(); //saves a copy of the roster so I can reference it easily anywhere in the app
         setupNavDrawer();
         profileName = (TextView) headerView.findViewById(R.id.userEmailDisplay);
         profPic = (CircleImageView) headerView.findViewById(R.id.circleView);
@@ -216,6 +222,37 @@ public class MainActivity extends AppCompatActivity {
                 mCurrentSelectedPosition = 0;
                 mDrawerLayout.closeDrawers();
         }
+    }
+
+    private void storeRoster(){
+        Firebase peopleRef = new Firebase("https://beartracks.firebaseio.com/people");
+        peopleRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Member teamMember = dataSnapshot.getValue(Member.class);
+                teamMembers.put(dataSnapshot.getKey(), teamMember);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+            }
+        });
+    }
+
+    public static Member getMemberByID(String id){
+        return teamMembers.get(id);
     }
 
     public void onSaveInstanceState(Bundle outState) {
