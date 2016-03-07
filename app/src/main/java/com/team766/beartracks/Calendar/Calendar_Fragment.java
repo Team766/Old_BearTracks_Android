@@ -1,5 +1,6 @@
 package com.team766.beartracks.Calendar;
 
+import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -41,8 +42,10 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
     private static final int TYPE_WEEK_VIEW = 3;
     private int mWeekViewType = TYPE_THREE_DAY_VIEW;
     private List<WeekViewEvent> preEvents = new ArrayList<WeekViewEvent>();
+    private List<Calendar_Event> calEvents = new ArrayList<>();
     private Calendar_Event calEvent;
     private Firebase calRef;
+    private int counter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -59,18 +62,22 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         mWeekView.setNumberOfVisibleDays(3);
         mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
 
-        setupCalendarEvents();
+        counter = 0; //Using counter to assign an index to each weekview event
+        downloadCalendarEvents();
 
         return view;
     }
 
-    private void setupCalendarEvents(){
+    private void downloadCalendarEvents(){
         calRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 calEvent = dataSnapshot.getValue(Calendar_Event.class);
+                calEvent.setId(dataSnapshot.getKey());
+                calEvents.add(calEvent);
                 preEvents.add(getEvent(calEvent.getStart(), calEvent.getEnd(), calEvent.getTitle()));
-                System.out.println(calEvent.getTitle());
+                //Toast.makeText(getContext(), Integer.toString(counter), Toast.LENGTH_SHORT).show();
+                counter++; //increment index
                 mWeekView.notifyDatasetChanged();
             }
 
@@ -169,22 +176,17 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         });
     }
 
-    @Override
-    public void onEventClick(WeekViewEvent event, RectF rectF) {
-        Toast.makeText(getActivity(), event.getName(), Toast.LENGTH_LONG).show();
+    private boolean eventMatches(WeekViewEvent event, int year, int month) {
+        return (event.getStartTime().get(Calendar.YEAR) == year && event.getStartTime().get(Calendar.MONTH) == month - 1) || (event.getEndTime().get(Calendar.YEAR) == year && event.getEndTime().get(Calendar.MONTH) == month - 1);
     }
 
     @Override
     public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         ArrayList<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
-        Date date = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int month = cal.get(Calendar.MONTH);
 
-        for(int i = 0; i<preEvents.size(); i++){
-            if(preEvents.get(i).getStartTime().get(Calendar.MONTH) == newMonth){
-                events.add(preEvents.get(i));
+        for(WeekViewEvent event: preEvents){
+            if (eventMatches(event, newYear, newMonth)) {
+                events.add(event);
             }
         }
         return events;
@@ -196,14 +198,24 @@ public class Calendar_Fragment extends Fragment implements WeekView.EventClickLi
         startTime.setTimeInMillis(start);
         endTime.setTimeInMillis(end);
 
-        WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime, title), startTime, endTime);
+        WeekViewEvent event = new WeekViewEvent(counter, getEventTitle(startTime, title), startTime, endTime);
         event.setColor(getResources().getColor(R.color.primary));
         mWeekView.notifyDatasetChanged();
+        //Toast.makeText(getContext(), Integer.toString((int)event.getId()), Toast.LENGTH_SHORT).show();
         return event;
     }
 
     private String getEventTitle(Calendar time, String title) {
         return String.format(title + " at %02d:%02d" + "\n\n", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
+    }
+
+
+    @Override
+    public void onEventClick(WeekViewEvent event, RectF rectF) {
+        Calendar_Event eventToView = calEvents.get((int)event.getId());
+        Toast.makeText(getContext(), eventToView.getId(), Toast.LENGTH_SHORT).show();
+        Bundle eventDetails = new Bundle();
+        eventDetails.putString("eventId", eventToView.getId());
     }
 
     @Override

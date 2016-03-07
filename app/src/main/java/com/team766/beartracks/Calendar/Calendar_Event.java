@@ -21,6 +21,7 @@ public class Calendar_Event {
     private HashMap<String, Attachment> attachments;
     private String meals;
     private String supervision;
+    private String id;
 
     public Calendar_Event(){}
 
@@ -68,4 +69,11 @@ public class Calendar_Event {
         return attachments;
     }
 
+    public void setId(String id){
+        this.id = id;
+    }
+
+    public String getId(){
+        return this.id;
+    }
 }
