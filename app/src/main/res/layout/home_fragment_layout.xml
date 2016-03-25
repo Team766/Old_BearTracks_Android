@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:text="HOME"
+        android:text="TEAM 766"
         android:textStyle="bold"
         android:textSize="40sp"/>
 

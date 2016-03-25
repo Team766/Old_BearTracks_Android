@@ -49,7 +49,7 @@ public class Member_Adapter extends ArrayAdapter<Member> {
 
         viewHolder.name.setText(member.getName());
         String picURL = member.getPhoto();
-        Picasso.with(this.getContext()).load(picURL).resize(175,175).centerCrop().into(viewHolder.pic);
+        Picasso.with(this.getContext()).load(picURL).resize(200,200).centerCrop().into(viewHolder.pic);
 
         return convertView;
     }
