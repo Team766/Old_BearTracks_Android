@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="Settings">
-        <CheckBoxPreference
-            android:title="Random Checkbox"
-            android:summary="This is a placeholder"
-            android:key="placeholder"/>
-
-    </PreferenceCategory>
-
     <PreferenceCategory android:title="About this app">
         <Preference
             android:title="Source"
@@ -17,6 +9,10 @@
             android:title="Open Source Licenses"
             android:summary="Details for libraries in this app"
             android:key="licenses"/>
+        <Preference
+            android:title="Author"
+            android:summary="This app was written by Tommy Yu for Team 766"
+            android:key="author"/>
         <Preference
             android:title="App Version"
             android:enabled="false"

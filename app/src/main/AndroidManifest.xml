@@ -31,7 +31,7 @@
         </activity>
 
         <activity android:name=".Settings.SettingsActivity"
-            android:label="Settings"
+            android:label="About"
             android:parentActivityName=".MainActivity"/>
 
         <activity android:name=".Roster.Member_Info"

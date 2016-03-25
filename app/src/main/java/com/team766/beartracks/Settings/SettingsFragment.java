@@ -20,6 +20,7 @@ public class SettingsFragment extends PreferenceFragment{
 
         Preference licenses = findPreference("licenses");
         Preference source = findPreference("viewSource");
+        Preference author = findPreference("author");
         Preference appVersion = findPreference("AppVersion");
 
         source.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -30,7 +31,15 @@ public class SettingsFragment extends PreferenceFragment{
             }
         });
 
-        appVersion.setTitle("Bear Tracks " + "0.0.0");
+        author.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                viewAuthor();
+                return false;
+            }
+        });
+
+        appVersion.setTitle("Bear Tracks " + "0.0.1");
     }
 
     private boolean viewSource(){
@@ -38,6 +47,15 @@ public class SettingsFragment extends PreferenceFragment{
         intent.setAction(Intent.ACTION_VIEW);
         intent.addCategory(Intent.CATEGORY_BROWSABLE);
         intent.setData(Uri.parse("https://github.com/Team766/BearTracks_Android"));
+        startActivity(intent);
+        return true;
+    }
+
+    private boolean viewAuthor(){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse("https://github.com/tommypacker"));
         startActivity(intent);
         return true;
     }
