@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.content.res.Configuration;
@@ -45,19 +46,19 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private FragmentManager fragmentManager;
-    private NavigationView nvDrawer;
     private View headerView;
     private Toolbar toolbar;
     private String userEmail, emailChecker;
     private TextView profileName;
-    static final String STATE_SELECTED_POSITION = "orientation";
-    private int mCurrentSelectedPosition = 0;
     private SharedPreferences.Editor editor;
     private Firebase peopleRef;
     private Member User;
     private CircleImageView profPic;
     public static HashMap<String, Member> teamMembers;
+    private MenuItem item;
 
+    //The code here was mainly written before I learned better coding styles so it probably
+    //looks like shit. It works though...
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +66,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         peopleRef = new Firebase("https://beartracks.firebaseio.com/people/");
-
-        if (savedInstanceState != null) {
-            mCurrentSelectedPosition =
-                    savedInstanceState.getInt(STATE_SELECTED_POSITION);
-        }
 
         SharedPreferences settings = getSharedPreferences(Welcome_Screen.PREFS_NAME, MODE_PRIVATE);
         editor = settings.edit();
@@ -110,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupNavDrawer(){
         if(toolbar != null){
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            nvDrawer = (NavigationView) findViewById(R.id.nvView);
+            NavigationView nvDrawer = (NavigationView) findViewById(R.id.nvView);
             headerView = nvDrawer.inflateHeaderView(R.layout.header);
             setupDrawerContent(nvDrawer);
 
@@ -169,8 +165,15 @@ public class MainActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
-                        return true;
+                        mDrawerLayout.closeDrawers();
+                        item = menuItem;
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                selectDrawerItem(item); // your fragment transactions go here
+                            }
+                        }, 200);
+                        return false;
                     }
                 });
     }
@@ -184,43 +187,38 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.home_frag:
                 swapFragment(new Home_Fragment());
-                mCurrentSelectedPosition = 0;
                 item.setChecked(true);
                 setTitle(item.getTitle());
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.cal_frag:
                 swapFragment(new Calendar_Fragment());
-                mCurrentSelectedPosition = 1;
                 item.setChecked(true);
                 setTitle(item.getTitle());
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.people_frag:
                 swapFragment(new Roster_List());
-                mCurrentSelectedPosition = 3;
                 item.setChecked(true);
                 setTitle(item.getTitle());
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.role_frag:
                 swapFragment(new Role_List());
-                mCurrentSelectedPosition = 4;
                 item.setChecked(true);
                 setTitle(item.getTitle());
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.settings:
                 startActivity(new Intent(this, SettingsActivity.class));
-                mCurrentSelectedPosition = 5;
                 break;
             case R.id.logOut:
                 confirmLogOut();
                 break;
             default:
                 swapFragment(new Home_Fragment());
-                mCurrentSelectedPosition = 0;
                 mDrawerLayout.closeDrawers();
+                break;
         }
     }
 
@@ -255,26 +253,11 @@ public class MainActivity extends AppCompatActivity {
         return teamMembers.get(id);
     }
 
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
-    }
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION, 0);
-        Menu menu = nvDrawer.getMenu();
-        menu.getItem(mCurrentSelectedPosition).setChecked(true);
-        selectDrawerItem(menu.getItem(mCurrentSelectedPosition).setChecked(true));
-    }
-
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
